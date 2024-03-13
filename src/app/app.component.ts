@@ -9,23 +9,32 @@ export class AppComponent implements OnInit {
   constructor(private ts: TodoService) { }
   todo = {
     title: '',
-    status: 'pending'
+    status: 'pending',
+    description: '',
+    active: true
   }
 
   title = 'todoApp';
   todos: any[] = [];
 
+  showIndex :any=null ;
 
+  showTodo(index : number){
+    this.showIndex = this.todos[index];
+  }
 
   getTodos() {
     this.ts.getTodos().subscribe((data: any) => {
       console.log(data);
       this.todos = data;
+      this.todos.reverse();
     }
     );
   }
+
 sendData() {
   this.ts.createTodo(this.todo).subscribe((data: any) => {
+    this.todo.title = '';
     console.log(data);
     this.getTodos();
   });
