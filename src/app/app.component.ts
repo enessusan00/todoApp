@@ -1,15 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from './todo.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    trigger('fadeOut', [
+      state('void', style({ opacity: '0', transform: 'translateY(-15%)' })),
+      state('*', style({ opacity: '*' })),
+      transition('* <=> void', [animate('0.4s ease-in-out')]),
+    ]),
+  ]
 })
 export class AppComponent implements OnInit {
   constructor(private ts: TodoService) { }
   todo = {
     title: '',
-    status: 'pending',
+    status: 'on going',
     description: '',
     active: true
   }
@@ -20,6 +28,7 @@ export class AppComponent implements OnInit {
   showIndex :any=null ;
 
   showTodo(index : number){
+    console.log(index);
     this.showIndex = this.todos[index];
   }
 
@@ -35,7 +44,11 @@ export class AppComponent implements OnInit {
 sendData() {
   this.ts.createTodo(this.todo).subscribe((data: any) => {
     this.todo.title = '';
-    console.log(data);
+    this.getTodos();
+  });
+}
+deleteAllDisables(){
+  this.ts.deleteAllDisables().subscribe((data: any) => {
     this.getTodos();
   });
 }
@@ -43,11 +56,40 @@ sendData() {
   ngOnInit() {
     this.getTodos();
   }
-  deleteTodo(id: number) {
-    this.ts.deleteTodo(id.toString()).subscribe((data: any) => {
-      console.log(data);
+
+  disableTodo (id: number) {
+    this.ts.updateTodo(id.toString(), { active: false }).subscribe((data: any) => {
       this.getTodos();
     });
+  }
+  activeTodo (id: number) {
+    this.ts.updateTodo(id.toString(), { active: true }).subscribe((data: any) => {
+      this.getTodos();
+    });
+  }
+  deleteTodo(id: number) {
+    this.ts.deleteTodo(id.toString()).subscribe((data: any) => {
+      this.getTodos();
+    });
+  }
+  completeTodo(id: number) {
+    this.ts.updateTodo(id.toString(), { status: 'done' }).subscribe((data: any) => {
+      this.getTodos();
+    });
+  }
+  startTodo (id: number) {
+    this.ts.updateTodo(id.toString(), { status: 'in progress' }).subscribe((data: any) => {
+      this.getTodos();
+    });
+  }
+  resetTodo (id: number) {  
+    this.ts.updateTodo(id.toString(), { status: 'on going' }).subscribe((data: any) => {
+      this.getTodos();
+    });
+  }
+  showDeleteds = false;
+  showDeletedModal(){
+    this.showDeleteds = !this.showDeleteds;
   }
 }
 

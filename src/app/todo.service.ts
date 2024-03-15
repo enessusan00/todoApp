@@ -28,5 +28,7 @@ export class TodoService {
   findByStatus(status: string): Observable<any> {
     return this.http.get(`${baseUrl}?status=${status}`);
   }
-  
+  deleteAllDisables(): Observable<any> {
+    return this.http.delete(`${baseUrl}/disables`);
+  }
 }
