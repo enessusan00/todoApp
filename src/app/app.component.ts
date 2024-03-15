@@ -11,6 +11,11 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
       state('*', style({ opacity: '*' })),
       transition('* <=> void', [animate('0.4s ease-in-out')]),
     ]),
+    trigger('fadeIn', [
+      state('void', style({ opacity: '0' })),
+      state('*', style({ opacity: '*' })),
+      transition('void => *', [animate('0.4s ease-out')]),
+    ]),
   ]
 })
 export class AppComponent implements OnInit {
@@ -25,71 +30,161 @@ export class AppComponent implements OnInit {
   title = 'todoApp';
   todos: any[] = [];
 
-  showIndex :any=null ;
+  showIndex: any = null;
 
-  showTodo(index : number){
+  showTodo(index: number) {
     console.log(index);
     this.showIndex = this.todos[index];
   }
 
   getTodos() {
     this.ts.getTodos().subscribe((data: any) => {
-      console.log(data);
       this.todos = data;
       this.todos.reverse();
-    }
-    );
+    });
   }
 
-sendData() {
-  this.ts.createTodo(this.todo).subscribe((data: any) => {
-    this.todo.title = '';
-    this.getTodos();
-  });
-}
-deleteAllDisables(){
-  this.ts.deleteAllDisables().subscribe((data: any) => {
-    this.getTodos();
-  });
-}
+  sendData() {
+    this.ts.createTodo(this.todo).subscribe((data: any) => {
+      this.todo.title = '';
+      this.getTodos();
+    });
+  }
+
+  deleteAllDisables() {
+    this.ts.deleteAllDisables().subscribe((data: any) => {
+      this.getTodos();
+    });
+  }
 
   ngOnInit() {
     this.getTodos();
   }
 
-  disableTodo (id: number) {
+  disableTodo(id: number) {
+    this.enableDetailModal();
+    this.showDetailModal = false;
     this.ts.updateTodo(id.toString(), { active: false }).subscribe((data: any) => {
       this.getTodos();
     });
   }
-  activeTodo (id: number) {
+
+  activeTodo(id: number) {
     this.ts.updateTodo(id.toString(), { active: true }).subscribe((data: any) => {
       this.getTodos();
     });
   }
+
   deleteTodo(id: number) {
+
     this.ts.deleteTodo(id.toString()).subscribe((data: any) => {
       this.getTodos();
     });
   }
+
   completeTodo(id: number) {
+    this.enableDetailModal();
+
     this.ts.updateTodo(id.toString(), { status: 'done' }).subscribe((data: any) => {
       this.getTodos();
     });
   }
-  startTodo (id: number) {
+
+  startTodo(id: number) {
+    this.enableDetailModal();
+
+    console.log('starttodo');
     this.ts.updateTodo(id.toString(), { status: 'in progress' }).subscribe((data: any) => {
       this.getTodos();
     });
   }
-  resetTodo (id: number) {  
+
+  resetTodo(id: number) {
+    this.enableDetailModal();
+
     this.ts.updateTodo(id.toString(), { status: 'on going' }).subscribe((data: any) => {
       this.getTodos();
     });
   }
+
   showDeleteds = false;
-  showDeletedModal(){
+
+  showDeletedModal() {
     this.showDeleteds = !this.showDeleteds;
+  }
+
+  defaultTodo = {
+    id: 0,
+    title: '',
+    status: 'on going',
+    description: '',
+    active: true
+  }
+
+  showDetailModal = false;
+  isUpdating = false;
+  enableDetailModal() {
+    this.isUpdating = true;
+    setTimeout(() => {
+      this.isUpdating = false;
+    }, 500);
+  }
+  toggleDetailModal(todo?: any) {
+    if (this.isUpdating == true) return;
+    if (todo) this.defaultTodo = todo;
+    console.log('toggle')
+    this.showDetailModal = !this.showDetailModal;
+  }
+
+  editTitle = false;
+
+  toggleEditTitle() {
+    this.editTitle = !this.editTitle;
+    if (this.editTitle) {
+      // focus on input
+    }
+  }
+
+  updateTitle() {
+    this.ts.updateTodo(this.defaultTodo.id.toString(), { title: this.defaultTodo.title }).subscribe((data: any) => {
+      this.getTodos();
+    });
+    this.editTitle = false;
+  }
+
+  cancelEditTitle() {
+    this.editTitle = false;
+    this.getTodos();
+    this.defaultTodo.title = this.todos.find(todo => todo.id === this.defaultTodo.id).title;
+  }
+
+  editDescription = false;
+
+  toggleEditDescription() {
+    this.editDescription = !this.editDescription;
+    if (this.editDescription) {
+      // focus on input
+    }
+  }
+
+  updateDescription() {
+    this.ts.updateTodo(this.defaultTodo.id.toString(), { description: this.defaultTodo.description }).subscribe((data: any) => {
+      this.getTodos();
+    });
+    this.editDescription = false;
+  }
+
+  cancelEditDescription() {
+    this.editDescription = false;
+    this.getTodos();
+    this.defaultTodo.description = this.todos.find(todo => todo.id === this.defaultTodo.id).description;
+  }
+
+  updateStatus(status: string) {
+    this.defaultTodo.status = status;
+    this.ts.updateTodo(this.defaultTodo.id.toString(), { status }).subscribe((data: any) => {
+      this.getTodos();
+    });
   }
 }
 
