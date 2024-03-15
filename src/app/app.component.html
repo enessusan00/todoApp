@@ -1,18 +1,19 @@
 <!-- Detail Modal -->
-<div [@fadeIn] *ngIf="showDetailModal" class="absolute top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-black/50">
-  <div 
+<div [@fadeIn] *ngIf="showDetailModal"
+  class="absolute top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-black/50">
+  <div
     [ngClass]="{'bg-[#BFD3F5]': defaultTodo.status=='on going', 'bg-[#F4DBCE]':  defaultTodo.status=='in progress', 'bg-[#D0EBD9]': defaultTodo.status=='done' }"
-  class="p-4 transition-all duration-700 rounded-lg w-156 h-156">
+    class="p-4 transition-all duration-700 rounded-lg w-156 h-156">
     <div class="flex items-center justify-between">
       <h1 class="text-2xl font-semibold">Task Detail</h1>
       <div class="flex gap-2">
 
         <span (click)="disableTodo(defaultTodo.id)" class="p-2 rounded-lg cursor-pointer hover:bg-red-100">
           <svg class="w-6 h-6 text-red-500 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
-          viewBox="0 0 18 20">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z" />
-        </svg>
+            viewBox="0 0 18 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z" />
+          </svg>
         </span>
         <span (click)="toggleDetailModal()" class="p-2 rounded-lg cursor-pointer hover:bg-gray-100">
           <svg class="w-6 h-6 text-gray-500 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -26,7 +27,8 @@
       <div class="flex items-center justify-between w-full h-12">
         <div class="flex items-center flex-none gap-2">
           <span class="text-sm font-semibold ">Title:</span>
-          <input [disabled]="!editTitle" maxlength="40" required type="text" class="p-1 text-sm rounded-md w-96 disabled:bg-opacity-0 disabled:bg-white/0 "
+          <input [disabled]="!editTitle" maxlength="40" required type="text"
+            class="p-1 text-sm rounded-md w-96 disabled:bg-opacity-0 disabled:bg-white/0 "
             [(ngModel)]="defaultTodo.title">
         </div>
         <button [@fadeIn] *ngIf="!editTitle" class="p-1 rounded-md hover:bg-white" (click)="toggleEditTitle()">
@@ -86,22 +88,19 @@
       <div class="flex justify-between w-full p-2 ">
         <span class="flex items-center h-10 text-sm font-semibold">Status</span>
         <div class="flex items-center justify-end gap-2 grow">
-          <button
-          [disabled]="defaultTodo.status=='on going'"
-          (click)="updateStatus('on going')"  [ngClass]="{'bg-blue-500  hover:bg-blue-500/90 disabled:hover:bg-blue-500/90 disabled:bg-blue-500': defaultTodo.status=='on going'}"
-          class="flex items-center gap-2 p-1 text-sm font-medium transition-all rounded-md bg-gray-500/30 hover:bg-blue-500/10 ">
+          <button [disabled]="defaultTodo.status=='on going'" (click)="updateStatus('on going')"
+            [ngClass]="{'bg-blue-500  hover:bg-blue-500/90 disabled:hover:bg-blue-500/90 disabled:bg-blue-500': defaultTodo.status=='on going'}"
+            class="flex items-center gap-2 p-1 text-sm font-medium transition-all rounded-md bg-gray-500/30 hover:bg-blue-500/10 ">
             <span class="flex items-center w-16 text-sm font-medium">On Going</span>
           </button>
-          <button 
-          [disabled]="defaultTodo.status=='in progress'"
-          (click)="updateStatus('in progress')"  [ngClass]="{' bg-orange-500  hover:bg-orange-500/90 disabled:hover:bg-orange-500/90 disabled:bg-orange-500': defaultTodo.status=='in progress'}"
-          class="flex items-center gap-2 p-1 text-sm font-medium transition-all rounded-md bg-gray-500/30 hover:bg-orange-500/10">
+          <button [disabled]="defaultTodo.status=='in progress'" (click)="updateStatus('in progress')"
+            [ngClass]="{' bg-orange-500  hover:bg-orange-500/90 disabled:hover:bg-orange-500/90 disabled:bg-orange-500': defaultTodo.status=='in progress'}"
+            class="flex items-center gap-2 p-1 text-sm font-medium transition-all rounded-md bg-gray-500/30 hover:bg-orange-500/10">
             <span class="flex items-center text-sm font-medium">In Progress</span>
           </button>
-          <button
-          [disabled]="defaultTodo.status=='done'"
-          (click)="updateStatus('done')"  [ngClass]="{' bg-green-500  hover:bg-green-500/90 disabled:hover:bg-green-500/90 disabled:bg-green-500': defaultTodo.status=='done'}"
-          class="flex items-center gap-2 p-1 text-sm font-medium transition-all rounded-md bg-gray-500/30 hover:bg-green-500/10">
+          <button [disabled]="defaultTodo.status=='done'" (click)="updateStatus('done')"
+            [ngClass]="{' bg-green-500  hover:bg-green-500/90 disabled:hover:bg-green-500/90 disabled:bg-green-500': defaultTodo.status=='done'}"
+            class="flex items-center gap-2 p-1 text-sm font-medium transition-all rounded-md bg-gray-500/30 hover:bg-green-500/10">
             <span class="flex items-center text-sm font-medium">Done</span>
           </button>
         </div>
@@ -110,6 +109,18 @@
         <span class="flex items-center h-6 text-sm font-semibold flex-0"> Gallery </span>
         <div class="w-full overflow-x-auto">
           <div class="flex space-x-4">
+
+            <!--Add Image-->
+
+            <button class="flex items-center justify-center p-1 rounded-md bg-gray-100/50 shrink-0 hover:bg-white size-44">
+              <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+                <path fill="#2F3039" d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z"/>
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 1H2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z"/>
+              </svg>
+            </button>
+
+
             <div class="relative shrink-0 group">
               <img src="https://via.placeholder.com/300" alt="Placeholder Image 1"
                 class="object-cover rounded-md size-44">
@@ -370,7 +381,7 @@
         <div class="overflow-visible grow">
           <div class="grid grid-cols-2 gap-2 ">
             <div *ngFor="let todo of todos | filterBy: ['status']:['in progress']  |  filterBy: ['active']:['true']">
-              <div class="transition-all duration-700 "  (click)="toggleDetailModal(todo)">
+              <div class="transition-all duration-700 " (click)="toggleDetailModal(todo)">
                 <input class="hidden" type="checkbox" [checked]="todo.status=='done'">
                 <label (click)="showTodo(todo.id)"
                   class="relative flex items-center justify-between h-12 px-4 transition-all rounded-md cursor-pointer group bg-orange-500/10 hover:bg-opacity-30 hover:bg-gray-100">
@@ -436,7 +447,7 @@
         <div class="overflow-visible grow">
           <div class="grid grid-cols-2 gap-2 ">
             <div *ngFor="let todo of todos| filterBy: ['status']:['done'] |  filterBy: ['active']:['true']">
-              <div class="transition-all duration-700 "  (click)="toggleDetailModal(todo)">
+              <div class="transition-all duration-700 " (click)="toggleDetailModal(todo)">
                 <input class="hidden" type="checkbox" [checked]="todo.status=='done'">
                 <label
                   class="relative flex items-center justify-between h-12 px-4 transition-all rounded-md cursor-pointer group bg-green-500/10 hover:bg-opacity-30 hover:bg-gray-100">
