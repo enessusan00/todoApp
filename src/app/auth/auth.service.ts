@@ -21,7 +21,7 @@ export class AuthService {
 
     setToken(response: any) {
         localStorage.setItem('ACCESS_TOKEN', response.token);
-        localStorage.setItem('USER_ID', response.userid);
+        localStorage.setItem('USER_ID', response.id);
         localStorage.setItem('ROLE', response.role);
     }
     signup(username: string , email: string, password: string): Observable<any> {
@@ -37,9 +37,7 @@ export class AuthService {
     authenticate(email: string, password: string): Observable<any> {
         const data = { email, password };
         return this.http
-            .post<any>(`${this.environment.apiUrl}/signin`, data, {
-                observe: 'response' as 'response',
-            })
+            .post<any>(`${this.environment.apiUrl}/signin`, data,)
             .pipe(
                 tap((response: any) => {
                     this.setToken(response);

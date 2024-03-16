@@ -1,32 +1,37 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TodoService } from './todo.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgArrayPipesModule } from 'ngx-pipes';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthTokenInterceptor } from './auth.token.interceptor';
+import { AuthInterceptorProvider } from './auth.token.interceptor';
+import { AuthComponent } from './auth/auth.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuard } from './auth/auth.guard';
 @NgModule({
   declarations: [
-    
-    AppComponent
+    AppComponent,
+    AuthComponent,
+    DashboardComponent
   ],
   imports: [
+
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-     HttpClientModule,
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     NgArrayPipesModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
+    AuthInterceptorProvider,
+    AuthGuard,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 const baseUrl = 'http://localhost:8080/api/todos';
@@ -11,7 +11,7 @@ export class TodoService {
     private http: HttpClient,
   ) { }
   getTodos(): Observable<any> {
-    return this.http.get(baseUrl);
+    return this.http.get(baseUrl + `/${localStorage.getItem('USER_ID')}/user`);
   }
   createTodo(data: any): Observable<any> {
     return this.http.post(baseUrl, data);
@@ -43,4 +43,5 @@ export class TodoService {
   deleteTodoImage(id: number): Observable<any> {
     return this.http.delete(`${baseUrl}/deleteImage/${id}`);
   }
+  
 }
