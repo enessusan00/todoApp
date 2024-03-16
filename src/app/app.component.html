@@ -111,20 +111,32 @@
           <div class="flex space-x-4">
 
             <!--Add Image-->
+          <div class="relative shrink-0 group">
 
-            <button class="flex items-center justify-center p-1 rounded-md bg-gray-100/50 shrink-0 hover:bg-white size-44">
-              <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
-                <path fill="#2F3039" d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z"/>
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 1H2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z"/>
+            <label
+              class="flex flex-col items-center justify-center tracking-wide rounded-lg cursor-pointer bg-gray-100/80 size-44 text-blue border-blue hover:bg-gray-200/80">
+
+              <svg class="w-4 h-4 stroke-current text-gray-400/40" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 20 18">
+                <path 
+                  d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z" />
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M18 1H2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" />
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z" />
               </svg>
-            </button>
 
 
-            <div class="relative shrink-0 group">
-              <img src="https://via.placeholder.com/300" alt="Placeholder Image 1"
-                class="object-cover rounded-md size-44">
-              <button
+              <span class="mt-2 text-xs leading-normal text-gray-400/50">Upload Image</span>
+              <input type='file' accept="image/*" class="hidden" (change)="uploadImage($event)" />
+            </label>
+          </div>
+
+
+
+            <div *ngFor="let item of defaultTodoImages" class="relative shrink-0 group">
+              <img [src]="item.url" alt="Placeholder Image 1" class="object-cover rounded-md size-44">
+              <button (click)="deleteTodoImage(item.id)"
                 class="absolute p-1 text-white rounded-full opacity-0 group-hover:opacity-100 hover:bg-red-500 bg-red-500/40 top-2 right-2">
                 <svg class="w-4 h-4 text-white stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
                   viewBox="0 0 24 24">

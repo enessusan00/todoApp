@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
   showIndex: any = null;
 
   showTodo(index: number) {
-    console.log(index);
     this.showIndex = this.todos[index];
   }
 
@@ -48,6 +47,7 @@ export class AppComponent implements OnInit {
     this.ts.createTodo(this.todo).subscribe((data: any) => {
       this.todo.title = '';
       this.getTodos();
+      this.toggleDetailModal(data);
     });
   }
 
@@ -132,7 +132,7 @@ export class AppComponent implements OnInit {
   toggleDetailModal(todo?: any) {
     if (this.isUpdating == true) return;
     if (todo) this.defaultTodo = todo;
-    console.log('toggle')
+    this.getTodoImages();
     this.showDetailModal = !this.showDetailModal;
   }
 
@@ -184,6 +184,33 @@ export class AppComponent implements OnInit {
     this.defaultTodo.status = status;
     this.ts.updateTodo(this.defaultTodo.id.toString(), { status }).subscribe((data: any) => {
       this.getTodos();
+    });
+  }
+
+
+  uploadImage(event: any) {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append('images', file);
+
+    this.ts.uploadImage(formData, this.defaultTodo.id).subscribe((data: any) => {
+      this.getTodoImages();
+    });
+  }
+  defaultTodoImages: any[] = [];
+  getTodoImages() {
+    this.ts.getTodoImages(this.defaultTodo.id).subscribe((data: any) => {
+      this.defaultTodoImages = data.map((image: any) => {
+        return {
+          id: image.id,
+          url: 'http://localhost:8080/' + image.imagePath
+        }
+      });
+    });
+  }
+  deleteTodoImage(id: number) {
+    this.ts.deleteTodoImage(id).subscribe((data: any) => {
+      this.getTodoImages();
     });
   }
 }

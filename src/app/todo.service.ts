@@ -31,4 +31,16 @@ export class TodoService {
   deleteAllDisables(): Observable<any> {
     return this.http.delete(`${baseUrl}/disables`);
   }
+  uploadImage(data: any,id: number): Observable<any> {
+    return this.http.post(`${baseUrl}/${id}/upload`, data);
+  }
+  getTodoImages(id: number): Observable<any> {
+    return this.http.get(`${baseUrl}/${id}/images`);
+  }
+  getTodoImage(path: string): Observable<any> {
+    return this.http.get(path);
+  }
+  deleteTodoImage(id: number): Observable<any> {
+    return this.http.delete(`${baseUrl}/deleteImage/${id}`);
+  }
 }
