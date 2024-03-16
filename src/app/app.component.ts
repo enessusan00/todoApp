@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from './todo.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { AuthService } from './auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,7 +20,10 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ]
 })
 export class AppComponent implements OnInit {
-  constructor(private ts: TodoService) { }
+  constructor(
+    private ts: TodoService,
+    private auth: AuthService
+  ) { }
   todo = {
     title: '',
     status: 'on going',
@@ -58,6 +62,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.auth.authenticate( 'dem22asdf3o2@todo.com', 'password').subscribe((data: any) => {
+      console.log(data);
+    }
+    );
+
+
     this.getTodos();
   }
 
