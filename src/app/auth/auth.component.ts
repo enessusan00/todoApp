@@ -25,7 +25,7 @@ export class AuthComponent {
   }
 
   signUp() {
-    this.auth.signup('demousaaaaaaaeererer2sasdsd', 'dsd@gmail.com', 'pasasdfsword').subscribe((data: any) => {
+    this.auth.signup('demousaaaaaaarer2sasdsd', 'dasdfasdfd@gmail.com', 'pasascasddfsword').subscribe((data: any) => {
       console.log(data);
     }
     );
