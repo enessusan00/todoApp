@@ -1,4 +1,4 @@
-<button class="p-2 bg-green-400 rounded-lg"
+<!-- <button class="p-2 bg-green-400 rounded-lg"
 (click)="login()">
     login
 </button>
@@ -8,3 +8,137 @@ class="p-2 bg-orange-300 rounded-md"
 (click)="signUp()">
     Signup
 </button>
+ -->
+<div class="flex items-center justify-center w-full h-screen bg-zinc-100">
+    <div class="flex flex-col justify-between gap-4 p-4 bg-white rounded-md shadow-md ">
+        <!--Title  -->
+        <div class="flex items-center gap-2 ">
+            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" width="908" height="858" viewBox="0 0 908 858"
+                fill="none">
+                <g filter="url(#filter0_d_1614_10035)">
+                    <mask id="mask0_1614_10035" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="0"
+                        width="900" height="850">
+                        <ellipse cx="454" cy="425" rx="450" ry="425" fill="#D9D9D9" />
+                    </mask>
+                    <g mask="url(#mask0_1614_10035)">
+                        <rect x="4" y="-75" width="300" height="1000" fill="#3B81F6" />
+                        <rect x="604" y="-75" width="300" height="1000" fill="#21C55D" />
+                        <rect x="263" y="-75" width="382" height="1000" fill="#F87315" />
+                    </g>
+                    <g filter="url(#filter1_i_1614_10035)">
+                        <path
+                            d="M742.283 459.594C719.22 574.907 632.275 683.485 510.274 707.747C450.772 719.596 389.049 712.372 333.892 687.101C278.736 661.83 232.958 619.802 203.077 567C173.196 514.199 160.735 453.316 167.469 393.021C174.203 332.726 199.788 276.092 240.581 231.183C324.252 139.026 465.533 113.657 580.845 159.782"
+                            stroke="white" stroke-width="81" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M350.219 413.469L465.531 528.781L742.281 228.969" stroke="white" stroke-width="81"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </g>
+                </g>
+                <defs>
+                    <filter id="filter0_d_1614_10035" x="0" y="0" width="908" height="858" filterUnits="userSpaceOnUse"
+                        color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                            result="hardAlpha" />
+                        <feOffset dy="4" />
+                        <feGaussianBlur stdDeviation="2" />
+                        <feComposite in2="hardAlpha" operator="out" />
+                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1614_10035" />
+                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1614_10035" result="shape" />
+                    </filter>
+                    <filter id="filter1_i_1614_10035" x="125.188" y="96.8301" width="657.602" height="666.769"
+                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                            result="hardAlpha" />
+                        <feOffset dy="12" />
+                        <feGaussianBlur stdDeviation="4.9" />
+                        <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.43 0" />
+                        <feBlend mode="normal" in2="shape" result="effect1_innerShadow_1614_10035" />
+                    </filter>
+                </defs>
+            </svg>
+            <h1
+                class="inline-block text-3xl font-bold text-center text-transparent bg-gradient-to-r from-blue-500 via-orange-500 to-green-500 bg-clip-text">
+                TODO</h1>
+
+
+        </div>
+        <div class="font-medium text-zinc-700">
+            Login
+        </div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <!-- Email -->
+            <div class="flex flex-col gap-1 mb-2">
+                <span class="text-sm font-light">Email</span>
+                <input type="email" class="p-1 rounded-md form-control bg-zinc-100 w-72" type="text"
+                    formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+                    placeholder="abc@example.com">
+                <div *ngIf="submitted && f['email'].errors" class="*:text-sm *:text-red-500">
+                    <div *ngIf="f['email'].errors['required']">Email is required</div>
+                    <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+                </div>
+            </div>
+            <!--Password-->
+            <div class="flex flex-col gap-1 mb-4">
+                <span class="text-sm font-light">Password</span>
+                <div class="relative flex flex-col ">
+                    <input formControlName="password" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+                        [type]="passInputType" class="p-1 rounded-md form-control bg-zinc-100 w-72"
+                        placeholder="123abc">
+                    <button type="button" (click)="togglePassType()" class="absolute text-sm right-2 top-1">
+                        {{passInputType == 'password' ? 'Show':'Hide' }}
+                    </button>
+                    <div *ngIf="submitted && f['password'].errors" class="*:text-sm *:text-red-500">
+                        <div *ngIf="f['password'].errors['required']">Password is required</div>
+                        <div *ngIf="f['password'].errors['minlength']">
+                            Password must be at least 6 characters
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit"
+                class="p-1 px-2 transition-all bg-blue-600 rounded-md hover:shadow-md text-zinc-100 border-zinc-300 active:scale-95 ">Login</button>
+        </form>
+
+
+    </div>
+
+
+    <div class="absolute top-2 right-2">
+        <button type="button"
+            class="p-1 px-2 text-white transition-all rounded-md bg-orange-500/70 hover:shadow-md active:scale-95">
+            SignUp
+        </button>
+    </div>
+    <div class="absolute p-2 bg-white rounded-md shadow-md right-2 top-2">
+        <div class="flex flex-col gap-1 mb-2">
+            <span class="text-sm font-light">User Name</span>
+            <input [(ngModel)]="username" type="text" class="p-1 rounded-md form-control bg-zinc-100 w-72" placeholder="username">
+        </div>
+        <div class="flex flex-col gap-1 mb-2">
+            <span class="text-sm font-light">Email</span>
+            <input type="email" class="p-1 rounded-md form-control bg-zinc-100 w-72" type="text" 
+               placeholder="abc@example.com" [(ngModel)]="email">
+        </div>
+        <div class="flex flex-col gap-1 mb-4">
+            <span class="text-sm font-light">Password</span>
+            <div class="relative flex flex-col ">
+                <input [(ngModel)]="password"
+                    [type]="passInputType" class="p-1 rounded-md form-control bg-zinc-100 w-72" placeholder="123abc">
+                <button type="button" (click)="togglePassType()" class="absolute text-sm right-2 top-1">
+                    {{passInputType == 'password' ? 'Show':'Hide' }}
+                </button>
+            </div>
+        </div>
+        <button (click)="signUp()" type="button"
+            class="p-1 px-2 text-white transition-all rounded-md bg-orange-500/70 hover:shadow-md active:scale-95">
+            SignUp
+        </button>
+    </div>
+    <div *ngIf="showError" class="absolute p-1 text-sm text-red-500 rounded-md bottom-36 bg-red-500/50">
+        {{errorText}}
+    </div>
+</div>
