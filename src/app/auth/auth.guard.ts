@@ -33,12 +33,21 @@ export class AuthGuard implements CanLoad {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    if (this.authService.authenticated) {
-      return true;
-    } else {
-      this.router.navigate(['/auth']);
-      return false;
-    }
+      const currentUser = localStorage.getItem('ROLE');
+      if(currentUser)
+      {
+        const roles = route.data!['roles'] as Array<string>;
+        if (this.authService.authenticated && roles.includes(currentUser)) {
+          return true;
+        } else {
+          this.router.navigate(['/auth']);
+          return false;
+        }
+      }
+      else{
+        this.router.navigate(['/auth']);
+        return false;
+      }
   }
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -48,11 +57,21 @@ export class AuthGuard implements CanLoad {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.authService.authenticated ) {
-      return true;
-    } else {
-      this.router.navigate(['/auth']);
-      return false;
-    }
+      const currentUser = localStorage.getItem('ROLE');
+      if(currentUser)
+      {
+        const roles = next.data!['roles'] as Array<string>;
+        if (this.authService.authenticated && roles.includes(currentUser)) {
+          return true;
+        } else {
+          this.router.navigate(['/auth']);
+          return false;
+        }
+      }
+      else{
+        this.router.navigate(['/auth']);
+        return false;
+      }
   }
+
 }

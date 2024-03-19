@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../todo.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +25,10 @@ import { HttpClient } from '@angular/common/http';
 export class DashboardComponent implements OnInit {
   constructor(
     private ts: TodoService,
-    private http: HttpClient
+    private http: HttpClient,
+    private auth: AuthService,
+    private router: Router,
+
   ) { }
   todo = {
     userId: localStorage.getItem('USER_ID'),
@@ -32,11 +37,15 @@ export class DashboardComponent implements OnInit {
     description: '',
     active: true
   }
-
+username : string | null='' ;
   title = 'todoApp';
   todos: any[] = [];
 
   showIndex: any = null;
+
+
+
+
 
   showTodo(index: number) {
     this.showIndex = this.todos[index];
@@ -63,10 +72,27 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  role : string | null = ''
   ngOnInit() {
+    this.username = localStorage.getItem("USERNAME");
+    this.role = localStorage.getItem("ROLE")
+    console.log(this.role)
+    if(this.role == 'admin'){
+      this.getAllUserTodos();
+    }else{
     this.getTodos();
   }
+}
 
+  getAllUserTodos(){
+    this.ts.getAllUserTodos().subscribe((data: any) => {
+      console.log(data)
+    });
+  }
+  logout(){
+    this.auth.logout();
+    this.router.navigate(['/auth']);
+  }
   disableTodo(id: number) {
     this.enableDetailModal();
     this.showDetailModal = false;
@@ -119,6 +145,10 @@ export class DashboardComponent implements OnInit {
     this.showDeleteds = !this.showDeleteds;
   }
 
+  showSettingsModal=false;
+toggleSettingsModal(){
+  this.showSettingsModal = !this.showSettingsModal
+}
   defaultTodo = {
     id: 0,
     title: '',

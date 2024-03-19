@@ -49,7 +49,10 @@ export class AuthService {
     get authenticated(): boolean {
         return localStorage.getItem('ACCESS_TOKEN') !== null;
     }
-
+    get isAdmin(): boolean {
+        return localStorage.getItem('ROLE') === 'admin';
+    }
+    
     // LOGOUT
     logout(): Observable<any> {
         return this.http

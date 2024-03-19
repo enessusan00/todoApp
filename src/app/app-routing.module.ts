@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth/auth.guard';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   {
@@ -15,10 +16,16 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'admin-dashboard',
+    canActivate: [AuthGuard],
+    component: AdminDashboardComponent,
+    data: { roles: ['admin'] }
+  },
+  {
     path: 'dashboard',
     canActivate: [ AuthGuard],
-    canLoad: [AuthGuard],
-    component: DashboardComponent
+    component: DashboardComponent,
+    data: { roles: ['user'] }
   }
 ];
 

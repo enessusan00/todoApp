@@ -91,6 +91,7 @@ export class AuthComponent implements OnInit {
   login(email:string,password:string) {
     this.auth.authenticate( email,password).subscribe({
       next: (n) => {
+        this.auth.isAdmin ? this.router.navigate(['/admin-dashboard']) :
         this.router.navigate(['/dashboard']);
       },
       error: (e) => {

@@ -217,6 +217,14 @@
             </div>
         </div>
     </div>
+
+    <div *ngIf="showSettingsModal" [@fadeOut]="'in'"
+        class="absolute z-40 flex flex-col w-40 gap-2 p-4 overflow-hidden bg-gray-200 rounded-lg shadow-lg top-16 right-8 ">
+        Hello 👋 {{username}}.
+        <button (click)="logout()" class="p-2 text-sm text-white transition-all rounded-md bg-gray-700/70 hover:shadow-md active:scale-95">
+            Logout
+        </button>
+    </div>
     <div class="relative">
         <!-- Navbar -->
         <div class="flex items-center justify-between h-20 px-8 bg-gray-100">
@@ -286,8 +294,7 @@
                     class="absolute p-0.5 text-xs text-red-500 bg-red-100 z-40 rounded-md peer-hover:block hidden -bottom-6 -left-4">
                     Deleted Tasks
                 </span>
-                <button class="p-2 rounded-lg hover:bg-slate-500/30">
-
+                <button (click)="toggleSettingsModal()" class="p-2 rounded-lg peer/settings hover:bg-slate-500/30">
                     <svg class="w-8 h-8 stroke-current text-slate-900" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 20 20">
                         <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -297,6 +304,10 @@
                         </g>
                     </svg>
                 </button>
+                <span
+                class="absolute p-0.5 text-xs text-gray-500 bg-gray-100 z-40 rounded-md peer-hover/settings:block hidden -bottom-6 -right-1">
+                Settings
+            </span>
             </div>
         </div>
         <div class="flex items-start justify-around gap-2 p-6 pt-0 text-gray-600 bg-gray-100">
