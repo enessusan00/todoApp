@@ -17,7 +17,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
         if (request.context.get(BYPASS_LOG) === false) {
-            const token = localStorage.getItem('ACCESS_TOKEN'); // Token'ınızı nerede sakladıysanız
+            const token = localStorage.getItem('ACCESS_TOKEN');
             if (token) {
                 request = request.clone({
                     setHeaders: {

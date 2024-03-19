@@ -43,5 +43,7 @@ export class TodoService {
   deleteTodoImage(id: number): Observable<any> {
     return this.http.delete(`${baseUrl}/deleteImage/${id}`);
   }
-  
+  getAllUserTodos(): Observable<any> {
+    return this.http.get(`${baseUrl}/all`);
+  }
 }

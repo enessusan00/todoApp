@@ -12,11 +12,13 @@ import { AuthInterceptorProvider } from './auth.token.interceptor';
 import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth/auth.guard';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    DashboardComponent
+    DashboardComponent,
+    AdminDashboardComponent
   ],
   imports: [
 
