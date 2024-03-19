@@ -2,11 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  styleUrls: ['./auth.component.scss'],
+  animations: [
+    trigger('fadeOut', [
+      state('void', style({ opacity: '0', transform: 'translateX(15%)' })),
+      state('*', style({ opacity: '*' })),
+      transition('* <=> void', [animate('0.4s ease-in-out')]),
+    ]),
+    trigger('fadeIn', [
+      state('void', style({ opacity: '0' })),
+      state('*', style({ opacity: '*' })),
+      transition('void => *', [animate('0.4s ease-out')]),
+    ]),
+  ]
 })
 export class AuthComponent implements OnInit {
   constructor(
@@ -22,6 +35,7 @@ export class AuthComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    
     this.form = this.formBuilder.group(
       {
         email: ['', [Validators.required, Validators.email]],
@@ -36,6 +50,7 @@ export class AuthComponent implements OnInit {
 
       },
     );
+    this.auth.logout().subscribe();
   }
   submitted = false;
   passInputType: string = 'password';
@@ -83,5 +98,22 @@ export class AuthComponent implements OnInit {
         this.showError = true;
       }
     })
+  }
+  showSignupModal = false
+  toggleSignupModal(){
+    this.showSignupModal = !this.showSignupModal
+  }
+  createAdmin(){
+    this.auth.createAdmin(this.username, this.email, this.password).subscribe(
+      {
+        next: (n) => {
+          this.login( this.email,this.password);
+        },
+        error: (e) => {
+          this.errorText = e.error;
+          this.showError = true;
+        }
+      }
+    );
   }
 }

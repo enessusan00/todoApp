@@ -13,6 +13,7 @@ export class AuthService {
         apiUrl: 'http://localhost:8080/api/auth',
     };
     clearToken() {
+        localStorage.removeItem('USERNAME')
         localStorage.removeItem('ACCESS_TOKEN');
         localStorage.removeItem('ROLE');
         localStorage.removeItem('USER_ID');
@@ -20,6 +21,7 @@ export class AuthService {
     }
 
     setToken(response: any) {
+        localStorage.setItem('USERNAME',response.username)
         localStorage.setItem('ACCESS_TOKEN', response.token);
         localStorage.setItem('USER_ID', response.id);
         localStorage.setItem('ROLE', response.role);
@@ -50,7 +52,6 @@ export class AuthService {
 
     // LOGOUT
     logout(): Observable<any> {
-        const data = { access_token: localStorage.getItem('ACCESS_TOKEN') };
         return this.http
             .post(`${this.environment.apiUrl}/logout`, { withCredentials: true })
             .pipe(
@@ -59,5 +60,8 @@ export class AuthService {
                 }),
             );
     }
-
+    createAdmin(username: string , email: string, password: string): Observable<any> {
+        const data = { username, email, password,role:'admin' };
+        return this.http.post<any>(`${this.environment.apiUrl}/signup `, data);
+    }
 }

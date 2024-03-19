@@ -108,12 +108,23 @@ class="p-2 bg-orange-300 rounded-md"
 
 
     <div class="absolute top-2 right-2">
-        <button type="button"
+        <button type="button" (click)="toggleSignupModal()" 
             class="p-1 px-2 text-white transition-all rounded-md bg-orange-500/70 hover:shadow-md active:scale-95">
             SignUp
         </button>
     </div>
-    <div class="absolute p-2 bg-white rounded-md shadow-md right-2 top-2">
+    <div *ngIf="showSignupModal" [@fadeOut] class="absolute p-2 bg-white rounded-md shadow-md right-2 top-2">
+
+        <div class="flex items-center justify-between">
+            <span class="font-semibold">Sign Up</span>
+            <span (click)="toggleSignupModal()" class="p-2 rounded-lg cursor-pointer hover:bg-gray-100">
+                <svg class="w-4 h-4 text-gray-500 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </span>
+        </div>
         <div class="flex flex-col gap-1 mb-2">
             <span class="text-sm font-light">User Name</span>
             <input [(ngModel)]="username" type="text" class="p-1 rounded-md form-control bg-zinc-100 w-72" placeholder="username">
@@ -133,6 +144,10 @@ class="p-2 bg-orange-300 rounded-md"
                 </button>
             </div>
         </div>
+        <button (click)="createAdmin()" type="button"
+            class="p-1 px-2 mr-8 text-white transition-all rounded-md bg-orange-500/70 hover:shadow-md active:scale-95">
+            Create Admin
+        </button>
         <button (click)="signUp()" type="button"
             class="p-1 px-2 text-white transition-all rounded-md bg-orange-500/70 hover:shadow-md active:scale-95">
             SignUp

@@ -36,7 +36,7 @@ export class AuthGuard implements CanLoad {
     if (this.authService.authenticated) {
       return true;
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/auth']);
       return false;
     }
   }
@@ -51,7 +51,7 @@ export class AuthGuard implements CanLoad {
     if (this.authService.authenticated ) {
       return true;
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/auth']);
       return false;
     }
   }
