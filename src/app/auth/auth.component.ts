@@ -95,7 +95,7 @@ export class AuthComponent implements OnInit {
         this.router.navigate(['/dashboard']);
       },
       error: (e) => {
-        this.errorText = e.error;
+        this.errorText = e.error || e.message;
         this.showError = true;
       }
     })
@@ -111,7 +111,7 @@ export class AuthComponent implements OnInit {
           this.login( this.email,this.password);
         },
         error: (e) => {
-          this.errorText = e.error;
+          this.errorText =  e.error.message;
           this.showError = true;
         }
       }

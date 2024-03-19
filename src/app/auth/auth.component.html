@@ -110,7 +110,7 @@ class="p-2 bg-orange-300 rounded-md"
     <div class="absolute top-2 right-2">
         <button type="button" (click)="toggleSignupModal()" 
             class="p-1 px-2 text-white transition-all rounded-md bg-orange-500/70 hover:shadow-md active:scale-95">
-            SignUp
+            Sign Up
         </button>
     </div>
     <div *ngIf="showSignupModal" [@fadeOut] class="absolute p-2 bg-white rounded-md shadow-md right-2 top-2">
@@ -144,14 +144,17 @@ class="p-2 bg-orange-300 rounded-md"
                 </button>
             </div>
         </div>
-        <button (click)="createAdmin()" type="button"
-            class="p-1 px-2 mr-8 text-white transition-all rounded-md bg-orange-500/70 hover:shadow-md active:scale-95">
-            Create Admin
-        </button>
-        <button (click)="signUp()" type="button"
-            class="p-1 px-2 text-white transition-all rounded-md bg-orange-500/70 hover:shadow-md active:scale-95">
-            SignUp
-        </button>
+        <div class="flex justify-between">
+
+            <button (click)="createAdmin()" type="button"
+                class="p-1 px-2 text-white transition-all rounded-md bg-orange-500/70 hover:shadow-md active:scale-95">
+                Create Admin
+            </button>
+            <button (click)="signUp()" type="button"
+                class="p-1 px-2 text-white transition-all rounded-md bg-orange-500/70 hover:shadow-md active:scale-95">
+                Sign Up
+            </button>
+        </div>
     </div>
     <div *ngIf="showError" class="absolute p-1 text-sm text-red-500 rounded-md bottom-36 bg-red-500/50">
         {{errorText}}

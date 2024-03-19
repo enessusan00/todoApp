@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-   animations: [
+  animations: [
     trigger('fadeOut', [
       state('void', style({ opacity: '0', transform: 'translateY(-15%)' })),
       state('*', style({ opacity: '*' })),
@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
     description: '',
     active: true
   }
-username : string | null='' ;
+  username: string | null = '';
   title = 'todoApp';
   todos: any[] = [];
 
@@ -72,24 +72,14 @@ username : string | null='' ;
     });
   }
 
-  role : string | null = ''
+  role: string | null = ''
   ngOnInit() {
     this.username = localStorage.getItem("USERNAME");
     this.role = localStorage.getItem("ROLE")
-    console.log(this.role)
-    if(this.role == 'admin'){
-      this.getAllUserTodos();
-    }else{
     this.getTodos();
   }
-}
 
-  getAllUserTodos(){
-    this.ts.getAllUserTodos().subscribe((data: any) => {
-      console.log(data)
-    });
-  }
-  logout(){
+  logout() {
     this.auth.logout();
     this.router.navigate(['/auth']);
   }
@@ -124,8 +114,6 @@ username : string | null='' ;
 
   startTodo(id: number) {
     this.enableDetailModal();
-
-    console.log('starttodo');
     this.ts.updateTodo(id.toString(), { status: 'in progress' }).subscribe((data: any) => {
       this.getTodos();
     });
@@ -145,10 +133,10 @@ username : string | null='' ;
     this.showDeleteds = !this.showDeleteds;
   }
 
-  showSettingsModal=false;
-toggleSettingsModal(){
-  this.showSettingsModal = !this.showSettingsModal
-}
+  showSettingsModal = false;
+  toggleSettingsModal() {
+    this.showSettingsModal = !this.showSettingsModal
+  }
   defaultTodo = {
     id: 0,
     title: '',

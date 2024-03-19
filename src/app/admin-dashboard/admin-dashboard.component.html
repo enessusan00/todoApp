@@ -41,7 +41,7 @@
                     <button class="p-1 rounded-md hover:bg-white" (click)="updateTitle()">
                         <svg class="w-6 h-6 text-green-500 stroke-current" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 16 12">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                                 d="M1 5.917 5.724 10.5 15 1.5" />
                         </svg>
                     </button>
@@ -71,7 +71,7 @@
                             <svg class="w-6 h-6 text-green-500 stroke-current" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 16 12">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="1" d="M1 5.917 5.724 10.5 15 1.5" />
+                                    stroke-width="1.5" d="M1 5.917 5.724 10.5 15 1.5" />
                             </svg>
                         </button>
                         <button class="p-1 rounded-md hover:bg-white" (click)="cancelEditDescription()">
@@ -165,7 +165,7 @@
     </div>
     <div class="relative">
         <!-- Navbar -->
-        <div class="flex items-center justify-between h-20 px-8 bg-gray-100">
+        <div class="flex items-center justify-between h-20 px-6 bg-gray-100">
             <div class="flex items-center gap-2 ">
                 <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" width="908" height="858" viewBox="0 0 908 858"
                     fill="none">
@@ -217,7 +217,7 @@
                 </svg>
                 <h1
                     class="inline-block text-3xl font-bold text-center text-transparent bg-gradient-to-r from-blue-500 via-orange-500 to-green-500 bg-clip-text">
-                    TODO</h1>
+                    TODO</h1> <span class="p-1 rounded-md bg-zinc-200">Admin Dashboard</span>
 
             </div>
             <div class="relative flex items-center gap-4">
@@ -239,9 +239,9 @@
             </div>
         </div>
         <div *ngFor="let item of allTodos;let i = index" class="flex flex-col ">
-            <div class="flex items-center justify-between px-6 border-t-2 border-zinc-400 bg-zinc-100">
+            <div class="flex items-center justify-between px-6 py-3 border-t-2 border-zinc-300 bg-zinc-100">
                 
-                <span>
+                <span class="p-1 rounded-md bg-zinc-200">
                 {{item.userInfo.user.username | titlecase}}
             </span>
             <div *ngIf="showDeleteds && deletedModalIndex==i " [@fadeOut]="'in'"
@@ -321,7 +321,7 @@
                 <!-- Todolist -->
                 <!-- On Going -->
                 <div
-                    class="max-w-full min-h-[90vh] max-h-[90vh] overflow-hidden  flex flex-col justify-between  p-8 bg-blue-500/30 rounded-lg shadow-lg w-1/3">
+                    class="max-w-full min-h-[95vh] max-h-[95vh] overflow-hidden  flex flex-col justify-between  p-8 bg-blue-500/30 rounded-lg shadow-lg w-1/3">
                     <div class="flex items-center mb-6">
                         <svg class="w-8 h-8 text-blue-500 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 12 20">
@@ -404,7 +404,7 @@
                 <!-- Component End  -->
                 <!-- Pending -->
                 <div
-                    class="max-w-full min-h-[90vh] max-h-[90vh] o overflow-hidden h-full flex flex-col justify-between relative p-8 bg-orange-500/20 rounded-lg shadow-lg w-1/3">
+                    class="max-w-full min-h-[95vh] max-h-[95vh] o overflow-hidden h-full flex flex-col justify-between relative p-8 bg-orange-500/20 rounded-lg shadow-lg w-1/3">
                     <div class="flex items-center mb-6">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-orange-500 stroke-current" width="24"
                             height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -478,7 +478,7 @@
                 <!-- Component End  -->
                 <!-- Done -->
                 <div
-                    class="max-w-full max-h-[90vh] min-h-[90vh] overflow-hidden h-full flex flex-col justify-between relative p-8 bg-green-500/20 rounded-lg shadow-lg w-1/3">
+                    class="max-w-full max-h-[95vh] min-h-[95vh] overflow-hidden h-full flex flex-col justify-between relative p-8 bg-green-500/20 rounded-lg shadow-lg w-1/3">
                     <div class="flex items-center mb-6">
                         <svg class="w-8 h-8 text-green-500 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 16 12">

@@ -75,7 +75,6 @@ allTodos: any[] = [];
 
   getAllUserTodos() {
     this.ts.getAllUserTodos().subscribe((data: any) => {
-      console.log(data)
       this.allTodos = data;
     });
   }
@@ -113,8 +112,6 @@ allTodos: any[] = [];
 
   startTodo(id: number) {
     this.enableDetailModal();
-
-    console.log('starttodo');
     this.ts.updateTodo(id.toString(), { status: 'in progress' }).subscribe((data: any) => {
       this.getAllUserTodos();
     });
