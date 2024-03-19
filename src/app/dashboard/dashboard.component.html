@@ -28,7 +28,7 @@
                 <div class="flex items-center flex-none gap-2">
                     <span class="text-sm font-semibold ">Title:</span>
                     <input [disabled]="!editTitle" maxlength="40" required type="text"
-                        class="p-1 text-sm rounded-md w-96 disabled:bg-opacity-0 disabled:bg-white/0 "
+                        class="p-1 text-sm rounded-md w-96 disabled:bg-opacity-40 disabled:bg-white "
                         [(ngModel)]="defaultTodo.title">
                 </div>
                 <button [@fadeIn] *ngIf="!editTitle" class="p-1 rounded-md hover:bg-white" (click)="toggleEditTitle()">
@@ -85,7 +85,7 @@
                 </div>
                 <textarea [disabled]="!editDescription" maxlength="40" required type="text"
                     [(ngModel)]="defaultTodo.description"
-                    class="w-full p-2 text-xs font-medium rounded-md resize-none min-h-24 disabled:bg-opacity-0 disabled:bg-white/0"></textarea>
+                    class="w-full p-2 text-xs font-medium rounded-md resize-none min-h-24 disabled:bg-opacity-40 disabled:bg-white"></textarea>
             </div>
             <div class="flex justify-between w-full p-2 ">
                 <span class="flex items-center h-10 text-sm font-semibold">Status</span>
