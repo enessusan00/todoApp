@@ -16,14 +16,14 @@ Run `ng serve --port 8081` for a dev server. Navigate to `http://localhost:8081/
 ### Sign Up / Create Admin User
 ![Screenshot 2024-03-19 at 16 18 56](https://github.com/enessusan00/todoApp/assets/69691286/3cf2deba-faec-42fa-9129-ac090bfa588e)
 
-## Dashboard PAge
+## Dashboard Page
 
 ![user dashboard](https://github.com/enessusan00/todoApp/assets/69691286/de5c157c-fda5-48fc-be2a-571c112737a7)
 
 ### Task Detail
 ![TodoApp · 4 38pm · 03-19](https://github.com/enessusan00/todoApp/assets/69691286/a0ea515c-5455-481a-bcbf-15c5b2f609e8)
 
-## Admin Dashboard Page
+## Admin Dashboard Page
 
 ![admin-dashboard  admin ](https://github.com/enessusan00/todoApp/assets/69691286/8508b3be-9dd6-478f-a320-10865d90fe33)
 
