@@ -1,0 +1,15 @@
+<div class="flex flex-col w-full h-screen overflow-hidden">
+    <!-- Sidebar -->
+
+    <app-navbar></app-navbar>
+    <div class="flex flex-row content-start overflow-hidden bg-gray-100 grow dark:bg-night-800">
+        <!-- Header -->
+        <!-- main content -->
+        <div id="main-content"
+            class="overflow-auto scrollbar-thumb-rounded scrollbar-track-rounded grow scrollbar-thin scrollbar-thumb-white scrollbar-track-gray-100 dark:scrollbar-thumb-night-700 dark:scrollbar-track-night-800">
+            <router-outlet></router-outlet>
+        </div>
+        
+        <app-sidebar></app-sidebar>
+    </div>
+</div>
