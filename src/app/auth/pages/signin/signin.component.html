@@ -34,7 +34,7 @@
                         placeholder="123abc"
                         type="password" class="h-12 p-2 rounded-md bg-green-700/20" />
                         <button type="button" (click)="togglePassType()"  class="absolute text-sm right-2 top-1">
-                            {{'password' == 'password' ? 'Show':'Hide' }}
+                            {{passInputType == 'password' ? 'Show':'Hide' }}
                         </button>
                         <div *ngIf="submitted && f['password'].errors" class="*:text-sm *:text-red-500">
                             <div *ngIf="f['password'].errors['required']">Password is required</div>
