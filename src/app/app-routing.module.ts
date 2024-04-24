@@ -1,31 +1,54 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth/auth.guard';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+
+import { SigninComponent } from './auth/components/signin/signin.component';
+import { SignupComponent } from './auth/components/signup/signup.component';
+import { LayoutComponent } from './layout/layout.component';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 const routes: Routes = [
   {
-    path: 'auth',
-    component: AuthComponent
-  },
-  {
     path: '',
-    redirectTo: '/auth',
-    pathMatch: 'full'
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+         import('./dashboard/dashboard.module').then((m):typeof DashboardModule => m.DashboardModule)
+      }
+    ]
+  },
+  // {
+  //   path: '',
+  //   redirectTo: '/auth',
+  //   pathMatch: 'full'
+  // },
+  // {
+  //   path: 'admin-dashboard',
+  //   canActivate: [AuthGuard],
+  //   data: { roles: ['admin'] },
+  // },
+  // {
+  //   path: 'dashboard',
+  //   canActivate: [ AuthGuard],
+  //   component: DashboardComponent,
+  //   data: { roles: ['user'] }
+  // }
+  
+  // {
+  //   path: 'dashboard',
+  //   component: DashboardComponent,
+  //   canActivate: [AuthGuard]
+  // },
+  {
+    path:'signin',
+    component: SigninComponent
   },
   {
-    path: 'admin-dashboard',
-    canActivate: [AuthGuard],
-    component: AdminDashboardComponent,
-    data: { roles: ['admin'] }
-  },
-  {
-    path: 'dashboard',
-    canActivate: [ AuthGuard],
-    component: DashboardComponent,
-    data: { roles: ['user'] }
+    path: 'signup',
+    component: SignupComponent
   }
 ];
 

@@ -1,0 +1,62 @@
+<nav class="bg-stone-50">
+    <div class="px-4 mx-auto sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <div class="flex items-center flex-shrink-0">
+                <a href="#" class="text-3xl font-extrabold text-neutral-600 ">Todo</a>
+                <div class="hidden md:block">
+                    <div class="flex items-baseline ml-10 space-x-4">
+                        <a href="/team"
+                            class="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-md text-zinc-500 group hover:bg-green-700/40 hover:text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16"
+                                class="text-stone-300 group-hover:text-white">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M8.75 15.5C8.75 15.5 7.5 15.5 7.5 14.25C7.5 13 8.75 9.25 13.75 9.25C18.75 9.25 20 13 20 14.25C20 15.5 18.75 15.5 18.75 15.5H8.75ZM13.75 8C14.7446 8 15.6984 7.60491 16.4017 6.90165C17.1049 6.19839 17.5 5.24456 17.5 4.25C17.5 3.25544 17.1049 2.30161 16.4017 1.59835C15.6984 0.895088 14.7446 0.5 13.75 0.5C12.7554 0.5 11.8016 0.895088 11.0983 1.59835C10.3951 2.30161 10 3.25544 10 4.25C10 5.24456 10.3951 6.19839 11.0983 6.90165C11.8016 7.60491 12.7554 8 13.75 8ZM6.52 15.5C6.33469 15.1098 6.24228 14.6819 6.25 14.25C6.25 12.5562 7.1 10.8125 8.67 9.6C7.88636 9.35854 7.06994 9.24047 6.25 9.25C1.25 9.25 0 13 0 14.25C0 15.5 1.25 15.5 1.25 15.5H6.52ZM5.625 8C6.4538 8 7.24866 7.67076 7.83471 7.08471C8.42076 6.49866 8.75 5.7038 8.75 4.875C8.75 4.0462 8.42076 3.25134 7.83471 2.66529C7.24866 2.07924 6.4538 1.75 5.625 1.75C4.7962 1.75 4.00134 2.07924 3.41529 2.66529C2.82924 3.25134 2.5 4.0462 2.5 4.875C2.5 5.7038 2.82924 6.49866 3.41529 7.08471C4.00134 7.67076 4.7962 8 5.625 8Z"
+                                    fill="currentColor" />
+                            </svg>
+                            Team
+                        </a>
+                        <a href="/dashboard"
+                            class="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-md text-zinc-500 group hover:bg-green-700/40 hover:text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                                class="text-stone-300 group-hover:text-white">
+                                <path
+                                    d="M3 14C3 14 2 14 2 13C2 12 3 9 8 9C13 9 14 12 14 13C14 14 13 14 13 14H3ZM8 8C8.79565 8 9.55871 7.68393 10.1213 7.12132C10.6839 6.55871 11 5.79565 11 5C11 4.20435 10.6839 3.44129 10.1213 2.87868C9.55871 2.31607 8.79565 2 8 2C7.20435 2 6.44129 2.31607 5.87868 2.87868C5.31607 3.44129 5 4.20435 5 5C5 5.79565 5.31607 6.55871 5.87868 7.12132C6.44129 7.68393 7.20435 8 8 8Z"
+                                    fill="currentColor" />
+                            </svg>
+                            Individual
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="relative group">
+
+                <label
+                    class="z-0 flex items-center justify-between gap-2 px-6 py-5 text-sm font-medium transition-all border cursor-pointer text-zinc-500 group/profile hover:bg-green-700/40 hover:text-white rounded-3xl border-zinc-300">
+                    <input type="checkbox" class="hidden">
+                    <p>
+                        <span class="font-bold ">John Doe</span>
+
+                    </p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        class="transition-all group-hover/profile:translate-y-1" fill="none">
+                        <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" />
+                    </svg>
+                </label>
+
+                <button (click)="logout()"
+                    class="absolute h-0 opacity-0  group-has-[:checked]:h-16  group-has-[:checked]:opacity-100     flex items-center justify-between w-full gap-2 overflow-hidden top-20 px-6 py-5 text-sm font-medium transition-all origin-bottom bg-white bg-opacity-100 border  text-zinc-500 group hover:bg-lime-950 hover:text-white rounded-3xl border-zinc-300">
+                    <p>
+                        <span class="font-bold ">Log out</span>
+
+                    </p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path
+                            d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.58L17 17L22 12M4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z"
+                            fill="currentColor" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>

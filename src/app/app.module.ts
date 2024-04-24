@@ -10,19 +10,21 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptorProvider } from './auth.token.interceptor';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AuthGuard } from './auth/auth.guard';
-import { SigninComponent } from './auth/pages/signin/signin.component';
-import { SignupComponent } from './auth/pages/signup/signup.component';
+import { SigninComponent } from './auth/components/signin/signin.component';
+import { SignupComponent } from './auth/components/signup/signup.component';
+import { LayoutComponent } from './layout/layout.component';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { NavbarComponent } from './layout/navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    AdminDashboardComponent,
     SigninComponent,
-    SignupComponent
-
+    SignupComponent,
+    LayoutComponent,
+    SidebarComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserAnimationsModule,
