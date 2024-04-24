@@ -9,19 +9,22 @@ import { NgArrayPipesModule } from 'ngx-pipes';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptorProvider } from './auth.token.interceptor';
-import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthGuard } from './auth/auth.guard';
+
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AuthGuard } from './auth/auth.guard';
+import { SigninComponent } from './auth/pages/signin/signin.component';
+import { SignupComponent } from './auth/pages/signup/signup.component';
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent,
     DashboardComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    SigninComponent,
+    SignupComponent
+
   ],
   imports: [
-
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
