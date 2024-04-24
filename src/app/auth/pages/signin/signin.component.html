@@ -1,52 +1,77 @@
 <div class="relative flex items-center justify-center w-screen h-screen bg-gradient-to-r from-neutral-600 to-lime-950">
     <div class="grid grid-cols-2 gap-12 bg-white rounded-3xl ">
         <!-- Left -->
-        <div class="flex flex-col justify-around h-full p-20 w-156">
+        <div class="flex flex-col h-full p-20 justify-evenly w-156">
             <p class="text-5xl font-bold">TODO</p>
-            <div class="flex flex-col gap-8">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="flex flex-col gap-12">
 
-                <p>
-                    <span class="text-2xl font-semibold ">
-                        Sign in
-                    </span>
-                </p>
-                <div class="flex flex-col">
                     <p>
-                        Email
+                        <span class="text-2xl font-semibold ">
+                            Sign in
+                        </span>
                     </p>
-                    <input type="email" class="h-12 p-2 rounded-md bg-green-700/20"  />
+
+                    <div class="flex flex-col">
+                        <p>
+                            Email
+                        </p>
+                        <input type="email" formControlName="email"
+                            [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" placeholder="abc@example.com"
+                            class="h-12 p-2 rounded-md bg-green-700/20" />
+                        <div *ngIf="submitted && f['email'].errors" class="*:text-sm *:text-red-500">
+                            <div *ngIf="f['email'].errors['required']">Email is required</div>
+                            <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+                        </div>
+                    </div>
+                    <div class="relative flex flex-col">
+                        <p>
+                            Password
+                        </p>
+                        <input 
+                        formControlName="password" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+                        [type]="passInputType" class="p-1 rounded-md form-control bg-zinc-100 w-72"
+                        placeholder="123abc"
+                        type="password" class="h-12 p-2 rounded-md bg-green-700/20" />
+                        <button type="button" (click)="togglePassType()"  class="absolute text-sm right-2 top-1">
+                            {{'password' == 'password' ? 'Show':'Hide' }}
+                        </button>
+                        <div *ngIf="submitted && f['password'].errors" class="*:text-sm *:text-red-500">
+                            <div *ngIf="f['password'].errors['required']">Password is required</div>
+                            <div *ngIf="f['password'].errors['minlength']">
+                                Password must be at least 6 characters
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="flex flex-col">
-                    <p>
-                        Password
+                <div class="flex flex-col items-center justify-center w-full gap-4">
+                    <p class="w-full">
+                        <span class="text-sm">
+                            Don't have an account?
+                        </span>
+                        <a href="/signup" class="text-sm text-lime-600">
+                            Sign up
+                        </a>
                     </p>
-                    <input type="password" class="h-12 p-2 rounded-md bg-green-700/20" />
+                    <button  type="submit"
+                        class="flex items-center justify-center w-40 h-12 gap-4 font-semibold text-white rounded-3xl bg-neutral-600">
+                        <p>
+                            Sign In
+                        </p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M3.56249 13.4062H17.7469L14.3648 9.11719C14.2687 8.99531 14.3555 8.8125 14.5125 8.8125H16.0312C16.2609 8.8125 16.4789 8.91797 16.6195 9.09844L20.4633 13.9734C20.85 14.4656 20.5008 15.1875 19.875 15.1875H3.56249C3.45936 15.1875 3.37499 15.1031 3.37499 15V13.5938C3.37499 13.4906 3.45936 13.4062 3.56249 13.4062Z"
+                                fill="white" />
+                        </svg>
+                    </button>
                 </div>
-            </div>
-            <div class="flex flex-col items-center justify-center w-full gap-4">
-                <p class="w-full">
-                    <span class="text-sm">
-                        Don't have an account?
-                    </span>
-                    <a href="/signup" class="text-sm text-lime-600">
-                        Sign up
-                    </a>
-                </p>
-                <button class="flex items-center justify-center w-40 h-12 gap-4 font-semibold text-white rounded-3xl bg-neutral-600">
-                    <p>
-                    Sign In
-                    </p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M3.56249 13.4062H17.7469L14.3648 9.11719C14.2687 8.99531 14.3555 8.8125 14.5125 8.8125H16.0312C16.2609 8.8125 16.4789 8.91797 16.6195 9.09844L20.4633 13.9734C20.85 14.4656 20.5008 15.1875 19.875 15.1875H3.56249C3.45936 15.1875 3.37499 15.1031 3.37499 15V13.5938C3.37499 13.4906 3.45936 13.4062 3.56249 13.4062Z" fill="white"/>
-                      </svg>
-                </button>
-            </div>
+            </form>
         </div>
         <!-- Right -->
         <div class="relative flex justify-end w-156">
             <div class="w-3/4 h-[849px] bg-zinc-400 rounded-3xl"></div>
 
-                <img src="/assets/images/signin.png" class="absolute bottom-12 right-12" alt="">
+            <img src="/assets/images/signin.png" class="absolute bottom-12 right-12" alt="">
         </div>
     </div>
 </div>
