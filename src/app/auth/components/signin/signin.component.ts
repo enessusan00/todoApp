@@ -63,7 +63,7 @@ export class SigninComponent {
     this.auth.authenticate( email,password).subscribe({
       next: (n) => {
         // this.auth.isAdmin ? this.router.navigate(['/admin-dashboard']) :
-        // this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard']);
       },
       error: (e) => {
         this.errorText = e.error || e.message;
