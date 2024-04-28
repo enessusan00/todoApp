@@ -16,6 +16,11 @@ import { SignupComponent } from './auth/components/signup/signup.component';
 import { LayoutComponent } from './layout/layout.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
+import { TodoModalComponent } from './shared/todo-modal/todo-modal.component';
+import { SharedModule } from './shared/shared.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CdkDropList, DragDropModule } from '@angular/cdk/drag-drop';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,9 +29,12 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     SignupComponent,
     LayoutComponent,
     SidebarComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
+CdkDropList,
+    SharedModule,
+    MatDialogModule,
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
@@ -34,7 +42,8 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    NgArrayPipesModule
+    NgArrayPipesModule,
+    NgbModule,
   ],
   providers: [
     AuthInterceptorProvider,
