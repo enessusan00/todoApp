@@ -47,7 +47,6 @@ export class TodoModalComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    console.log(this.data.todo);
     this.todo = this.data.todo;
     this.getImages();
   }
@@ -64,9 +63,7 @@ export class TodoModalComponent implements OnInit {
     this.updateTodo();
   }
   updateTodo() {
-    console.log(this.todo);
     this.todoService.updateTodo(this.todo.id, this.todo).subscribe((todo: any) => {
-      // console.log(todo);
     }
     );
   }
