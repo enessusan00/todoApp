@@ -6,6 +6,9 @@ import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardRoutingModule } from './dashboard-routing.module';
+import { SharedModule } from '../shared/shared.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { NgArrayPipesModule } from 'ngx-pipes';
 
 
 
@@ -15,6 +18,9 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     UserComponent,
   ],
   imports: [
+    NgArrayPipesModule,
+    DragDropModule,
+    SharedModule,
     RouterModule,
     CommonModule,
     CommonModule,

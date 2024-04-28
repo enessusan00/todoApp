@@ -21,6 +21,7 @@ import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CdkDropList, DragDropModule } from '@angular/cdk/drag-drop';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,9 +33,9 @@ import { CdkDropList, DragDropModule } from '@angular/cdk/drag-drop';
     NavbarComponent,
   ],
   imports: [
+    MatButtonModule,
 CdkDropList,
     SharedModule,
-    MatDialogModule,
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
@@ -42,7 +43,6 @@ CdkDropList,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    NgArrayPipesModule,
     NgbModule,
   ],
   providers: [

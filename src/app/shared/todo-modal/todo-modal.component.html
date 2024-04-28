@@ -1,0 +1,133 @@
+<div class="p-4 transition-all duration-700 rounded-lg w-156 h-156 bg-stone-50">
+    <div class="flex items-center justify-between">
+        <h1 class="text-2xl font-semibold">Task Detail</h1>
+        <div class="flex gap-2">
+
+            <span (click)="removeTodo(todo.id)" class="p-2 rounded-lg cursor-pointer hover:bg-red-100">
+                <svg class="w-6 h-6 text-red-500 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 18 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z" />
+                </svg>
+            </span>
+
+            <span (click)="closeModal()" class="p-2 rounded-lg cursor-pointer hover:bg-gray-100">
+                <svg class="w-6 h-6 text-gray-500 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </span>
+        </div>
+    </div>
+    <div class="flex flex-col items-center gap-2 *:px-4 mt-4 *:bg-gray-200/50 *:rounded-md ">
+        <div class="flex items-center justify-between w-full h-12 group">
+            <div class="flex items-center flex-none gap-2">
+                <span class="text-sm font-semibold ">Title:</span>
+                <input disabled maxlength="40" required type="text" id="titleInput"
+                    class="p-1 text-sm rounded-md w-96 disabled:bg-opacity-0 disabled:bg-white/0 "
+                    [(ngModel)]="todo.title">
+            </div>
+            <button class="p-1 rounded-md hover:bg-white group-has-[:disabled]:block hidden"
+                (click)="toggleEdit('titleInput')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
+                    <path
+                        d="M19.4 7.34L16.66 4.6A2 2 0 0 0 14 4.53l-9 9a2 2 0 0 0-.57 1.21L4 18.91a1 1 0 0 0 .29.8A1 1 0 0 0 5 20h.09l4.17-.38a2 2 0 0 0 1.21-.57l9-9a1.92 1.92 0 0 0-.07-2.71zM9.08 17.62l-3 .28.27-3L12 9.32l2.7 2.7zM16 10.68L13.32 8l1.95-2L18 8.73z" />
+                </svg>
+            </button>
+            <!-- Edit title -->
+            <button class="p-1 rounded-md hover:bg-white group-has-[:disabled]:hidden block"
+                (click)="toggleEdit('titleInput')">
+                <svg class="w-6 h-6 text-green-500 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 16 12">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                        d="M1 5.917 5.724 10.5 15 1.5" />
+                </svg>
+            </button>
+
+        </div>
+        <div class="flex flex-col w-full h-40 group">
+            <div class="flex items-center justify-between w-full h-12">
+                <div class="flex items-center flex-none gap-2">
+                    <span class="text-sm font-semibold ">Description</span>
+                </div>
+                <button class=" p-1 rounded-md hover:bg-white group-has-[:disabled]:block hidden"
+                    (click)="toggleEdit('descriptionInput')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
+                        <path
+                            d="M19.4 7.34L16.66 4.6A2 2 0 0 0 14 4.53l-9 9a2 2 0 0 0-.57 1.21L4 18.91a1 1 0 0 0 .29.8A1 1 0 0 0 5 20h.09l4.17-.38a2 2 0 0 0 1.21-.57l9-9a1.92 1.92 0 0 0-.07-2.71zM9.08 17.62l-3 .28.27-3L12 9.32l2.7 2.7zM16 10.68L13.32 8l1.95-2L18 8.73z" />
+                    </svg>
+                </button>
+
+                <button class=" group-has-[:disabled]:hidden block p-1 rounded-md hover:bg-white"
+                    (click)="toggleEdit('descriptionInput')">
+                    <svg class="w-6 h-6 text-green-500 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 16 12">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                            d="M1 5.917 5.724 10.5 15 1.5" />
+                    </svg>
+                </button>
+
+            </div>
+            <textarea disabled maxlength="40" required type="text" id="descriptionInput" [(ngModel)]="todo.description"
+                class="w-full p-2 text-xs font-medium rounded-md resize-none min-h-24 disabled:bg-opacity-0 disabled:bg-white/0"></textarea>
+        </div>
+        <div class="flex justify-between w-full p-2">
+            <span class="flex items-center h-10 text-sm font-semibold">Status : {{todo.status | titlecase }} </span>
+            <div class="flex items-center justify-end gap-2 grow *:flex ">
+                <button [disabled]="todo.status=='not started'" (click)="updateStatus('not started')"
+                    class="flex items-center gap-2 p-1 text-sm font-medium transition-all bg-gray-200 rounded-md disabled:hover:bg-gray-300/50 disabled:bg-gray-300/50 disabled:cursor-default hover:bg-gray-300/70">
+                    <span class="items-center w-20 text-sm font-medium">Not Started</span>
+                </button>
+                <button [disabled]="todo.status=='in progress'" (click)="updateStatus('in progress')"
+                    class="flex items-center gap-2 p-1 text-sm font-medium transition-all rounded-md bg-violet-100 hover:bg-violet-200/70 disabled:hover:bg-violet-200/70 disabled:bg-violet-200/70">
+                    <span class="items-center text-sm font-medium ">In Progress</span>
+                </button>
+                <button [disabled]="todo.status=='done'" (click)="updateStatus('done')"
+                    class="flex items-center gap-2 p-1 text-sm font-medium transition-all rounded-md bg-green-700/20 hover:bg-green-700/40 disabled:hover:bg-green-700/40 disabled:bg-green-700/40">
+                    <span class="items-center text-sm font-medium ">Done</span>
+                </button>
+            </div>
+        </div>
+        <div class="flex flex-col w-full gap-2 p-4 bg-gray-100 ">
+            <span class="flex items-center h-6 text-sm font-semibold flex-0"> Gallery </span>
+            <div class="w-full">
+                <div class="flex space-x-4 overflow-x-scroll ">
+                    <div class="relative shrink-0 group">
+
+                        <label
+                            class="flex flex-col items-center justify-center tracking-wide rounded-lg cursor-pointer bg-gray-100/80 size-44 text-blue border-blue hover:bg-gray-200/80">
+
+                            <svg class="w-4 h-4 stroke-current text-gray-400/40" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 20 18">
+                                <path
+                                    d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z" />
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M18 1H2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z" />
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z" />
+                            </svg>
+
+
+                            <span class="mt-2 text-xs leading-normal text-gray-400/50">Upload Image</span>
+                            <input type='file' accept="image/*" class="hidden" (change)="uploadImage($event)" />
+                        </label>
+                    </div>
+                    <div *ngFor="let item of images" class="relative shrink-0 group">
+                        <img [src]="item.url" alt="Placeholder Image 1" class="object-cover rounded-md size-44">
+                        <button (click)="deleteTodoImage(item.id)"
+                            class="absolute p-1 text-white rounded-full opacity-0 group-hover:opacity-100 hover:bg-red-500 bg-red-500/40 top-2 right-2">
+                            <svg class="w-4 h-4 text-white stroke-current" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
