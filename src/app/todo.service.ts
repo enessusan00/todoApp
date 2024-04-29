@@ -10,6 +10,9 @@ export class TodoService {
   constructor(
     private http: HttpClient,
   ) { }
+  getTeamTodos(): Observable<any> {
+    return this.http.get(baseUrl + '/team');
+  }
   getTodos(): Observable<any> {
     return this.http.get(baseUrl + `/${localStorage.getItem('USER_ID')}/user`);
   }

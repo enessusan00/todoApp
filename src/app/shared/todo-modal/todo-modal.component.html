@@ -88,13 +88,13 @@
                 </button>
             </div>
         </div>
-        <div class="flex flex-col w-full gap-2 p-4 bg-gray-100 ">
+        <div class="flex flex-col w-full gap-2 p-4 bg-gray-100 grow">
             <span class="flex items-center h-6 text-sm font-semibold flex-0"> Gallery </span>
-            <div class="w-full">
-                <div class="flex space-x-4 overflow-x-scroll ">
+            <div class="w-full h-full grow">
+                <div class="flex space-x-4 overflow-x-scroll h-44">
                     <div class="relative shrink-0 group">
 
-                        <label
+                        <label *ngIf="canEdit"
                             class="flex flex-col items-center justify-center tracking-wide rounded-lg cursor-pointer bg-gray-100/80 size-44 text-blue border-blue hover:bg-gray-200/80">
 
                             <svg class="w-4 h-4 stroke-current text-gray-400/40" xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +111,7 @@
 
 
                             <span class="mt-2 text-xs leading-normal text-gray-400/50">Upload Image</span>
-                            <input *ngIf="canEdit" type='file' accept="image/*" class="hidden" (change)="uploadImage($event)" />
+                            <input  type='file' accept="image/*" class="hidden" (change)="uploadImage($event)" />
                         </label>
                     </div>
                     <div *ngFor="let item of images" class="relative shrink-0 group">
@@ -124,6 +124,10 @@
                                     d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
+                    </div>
+                    <div *ngIf="!canEdit && images.length == 0">
+                        <p class="text-sm font-semibold text-gray-400">No image uploaded</p>
+                        
                     </div>
 
                 </div>
