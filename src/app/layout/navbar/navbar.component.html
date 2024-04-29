@@ -29,13 +29,13 @@
                     </div>
                 </div>
             </div>
-            <div class="relative group">
+            <div class="relative group ">
 
                 <label
-                    class="z-0 flex items-center justify-between gap-2 px-6 py-5 text-sm font-medium transition-all border cursor-pointer text-zinc-500 group/profile hover:bg-green-700/40 hover:text-white rounded-3xl border-zinc-300">
+                    class="z-0 flex items-center justify-between gap-2 px-6 py-5 text-sm font-medium transition-all border cursor-pointer min-w-48 text-zinc-500 group/profile hover:bg-green-700/40 hover:text-white rounded-3xl border-zinc-300">
                     <input type="checkbox" class="hidden">
                     <p>
-                        <span class="font-bold ">John Doe</span>
+                        <span class="font-bold ">{{username}}</span>
 
                     </p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -45,7 +45,7 @@
                 </label>
 
                 <button (click)="logout()"
-                    class="absolute h-0 opacity-0  group-has-[:checked]:h-16  group-has-[:checked]:opacity-100     flex items-center justify-between w-full gap-2 overflow-hidden top-20 px-6 py-5 text-sm font-medium transition-all origin-bottom bg-white bg-opacity-100 border  text-zinc-500 group hover:bg-lime-950 hover:text-white rounded-3xl border-zinc-300">
+                    class="absolute h-0 opacity-0  group-has-[:checked]:flex  hidden group-has-[:checked]:h-16  group-has-[:checked]:opacity-100      items-center justify-between w-full gap-2 overflow-hidden top-20 px-6 py-5 text-sm font-medium transition-all origin-bottom bg-white bg-opacity-100 border  text-zinc-500 group hover:bg-lime-950 hover:text-white rounded-3xl border-zinc-300">
                     <p>
                         <span class="font-bold ">Log out</span>
 

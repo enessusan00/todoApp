@@ -23,7 +23,7 @@ export class AuthGuard implements CanLoad {
     private activatedRoute: ActivatedRoute,
     private router: Router,
   ) { }
- 
+
 
   canLoad(
     route: Route,
@@ -33,21 +33,13 @@ export class AuthGuard implements CanLoad {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-      const currentUser = localStorage.getItem('ROLE');
-      if(currentUser)
-      {
-        const roles = route.data!['roles'] as Array<string>;
-        if (this.authService.authenticated && roles.includes(currentUser)) {
-          return true;
-        } else {
-          this.router.navigate(['/auth']);
-          return false;
-        }
-      }
-      else{
-        this.router.navigate(['/auth']);
-        return false;
-      }
+    if (this.authService.authenticated) {
+      return true;
+    } else {
+      this.router.navigate(['/signin']);
+      return false;
+    }
+
   }
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -57,21 +49,16 @@ export class AuthGuard implements CanLoad {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-      const currentUser = localStorage.getItem('ROLE');
-      if(currentUser)
-      {
-        const roles = next.data!['roles'] as Array<string>;
-        if (this.authService.authenticated && roles.includes(currentUser)) {
-          return true;
-        } else {
-          this.router.navigate(['/auth']);
-          return false;
-        }
-      }
-      else{
+    
+     
+      if (this.authService.authenticated) {
+        return true;
+      } else {
         this.router.navigate(['/auth']);
         return false;
       }
+    
+    
   }
 
 }

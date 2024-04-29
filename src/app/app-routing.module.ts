@@ -12,6 +12,7 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -20,11 +21,11 @@ const routes: Routes = [
       }
     ]
   },
-  // {
-  //   path: '',
-  //   redirectTo: '/auth',
-  //   pathMatch: 'full'
-  // },
+  {
+    path: '',
+    redirectTo: '/signin',
+    pathMatch: 'full'
+  },
   // {
   //   path: 'admin-dashboard',
   //   canActivate: [AuthGuard],
