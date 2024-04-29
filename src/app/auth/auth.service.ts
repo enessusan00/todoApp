@@ -52,7 +52,9 @@ export class AuthService {
     get isAdmin(): boolean {
         return localStorage.getItem('ROLE') === 'admin';
     }
-    
+    getUserList(): Observable<any> {
+        return this.http.get(`${this.environment.apiUrl}/users`);
+    }
     // LOGOUT
     logout(): Observable<any> {
         return this.http

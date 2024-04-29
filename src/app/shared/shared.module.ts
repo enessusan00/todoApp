@@ -6,9 +6,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgArrayPipesModule } from "ngx-pipes";
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from "@angular/material/dialog";
+import { UserListComponent } from './user-list/user-list.component';
 @NgModule({
   declarations: [
-    TodoModalComponent
+    TodoModalComponent,
+    UserListComponent
   ],
   imports: [
     CommonModule,

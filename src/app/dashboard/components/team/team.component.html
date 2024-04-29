@@ -1,7 +1,32 @@
 <div class="flex flex-col w-full h-full gap-4 pt-5 p-9">
-    <p class="flex-none text-2xl font-bold text-neutral-800">
-       Team
-    </p>
+    <div class="flex items-center w-full gap-2 ">
+
+        <p class="flex-none text-2xl font-bold text-neutral-800">
+            Team
+        </p>
+
+        <div *ngIf="isAdmin()" class="flex items-center gap-2 text-xs text-neutral-500" >
+            <span class="flex items-center justify-center bg-green-200 rounded-full size-4 animate-pulse">
+                <span class="flex items-center justify-center bg-green-500 rounded-full size-2">
+                </span>
+            </span>
+            <p>
+                {{activeCount}} Active
+            </p>
+            <button (click)="showUserList()" class="flex items-center justify-center gap-2 p-2 transition-all rounded-lg hover:bg-stone-200">
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16"
+                class="text-stone-300 group-hover:text-white">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M8.75 15.5C8.75 15.5 7.5 15.5 7.5 14.25C7.5 13 8.75 9.25 13.75 9.25C18.75 9.25 20 13 20 14.25C20 15.5 18.75 15.5 18.75 15.5H8.75ZM13.75 8C14.7446 8 15.6984 7.60491 16.4017 6.90165C17.1049 6.19839 17.5 5.24456 17.5 4.25C17.5 3.25544 17.1049 2.30161 16.4017 1.59835C15.6984 0.895088 14.7446 0.5 13.75 0.5C12.7554 0.5 11.8016 0.895088 11.0983 1.59835C10.3951 2.30161 10 3.25544 10 4.25C10 5.24456 10.3951 6.19839 11.0983 6.90165C11.8016 7.60491 12.7554 8 13.75 8ZM6.52 15.5C6.33469 15.1098 6.24228 14.6819 6.25 14.25C6.25 12.5562 7.1 10.8125 8.67 9.6C7.88636 9.35854 7.06994 9.24047 6.25 9.25C1.25 9.25 0 13 0 14.25C0 15.5 1.25 15.5 1.25 15.5H6.52ZM5.625 8C6.4538 8 7.24866 7.67076 7.83471 7.08471C8.42076 6.49866 8.75 5.7038 8.75 4.875C8.75 4.0462 8.42076 3.25134 7.83471 2.66529C7.24866 2.07924 6.4538 1.75 5.625 1.75C4.7962 1.75 4.00134 2.07924 3.41529 2.66529C2.82924 3.25134 2.5 4.0462 2.5 4.875C2.5 5.7038 2.82924 6.49866 3.41529 7.08471C4.00134 7.67076 4.7962 8 5.625 8Z"
+                    fill="currentColor" />
+            </svg>
+            <p>
+              {{team.length}} Total
+            </p>
+            </button>
+        </div>
+    </div>
     <div cdkDropListGroup
         class="grid items-start justify-start grid-cols-3 gap-12 p-5 overflow-scroll bg-stone-50 rounded-xl grow">
         <div class="flex flex-col w-full h-full overflow-x-scroll">
@@ -94,8 +119,7 @@
                             </p>
 
                         </div>
-                        <div
-                            *ngIf=" (not_started.length != 0 || in_progress.length != 0) && done.length == 0 ">
+                        <div *ngIf=" (not_started.length != 0 || in_progress.length != 0) && done.length == 0 ">
                             <div class="w-full p-4 mb-3 bg-white border rounded-lg shadow ">
                                 <p class="font-semibold text-neutral-700">
                                     Nothing to be done 🙃

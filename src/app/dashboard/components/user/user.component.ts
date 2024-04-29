@@ -82,7 +82,7 @@ export class UserComponent implements OnInit {
       description: 'Do something',
       status: 'not started',
       type: 'personal',
-      id: this.userTodos.length === 0 ? 1 : this.userTodos[this.userTodos.length - 1].id + 1,
+      id: localStorage.getItem('USER_ID')
     }
     this.todoService.createTodo(todo).subscribe((todo: any) => {
 

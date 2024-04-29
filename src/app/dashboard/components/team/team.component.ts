@@ -10,6 +10,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/auth/auth.service';
 import { TodoModalComponent } from 'src/app/shared/todo-modal/todo-modal.component';
+import { UserListComponent } from 'src/app/shared/user-list/user-list.component';
 import { TodoService } from 'src/app/todo.service';
 
 @Component({
@@ -54,7 +55,7 @@ export class TeamComponent implements OnInit {
         todo: item,
         component: this
       }
-    
+
     }
     );
     dialogRef.afterClosed().subscribe(result => {
@@ -62,16 +63,34 @@ export class TeamComponent implements OnInit {
     });
   }
 
-  
+  team: any[] = [];
   ngOnInit(): void {
     this.getTodos();
-
+    if (this.isAdmin()) {
+      this.getUserList();
+    }
   }
+  activeCount = 0;
+  getUserList() {
+    this.auth.getUserList().subscribe((users: any) => {
+      this.team = users;
+      this.activeCount = this.team.filter((user: any) => user.active).length;
 
+    });
+  }
+  showUserList() {
+    const dialogRef = this.dialog.open(UserListComponent, {
+      data: {
+        team: this.team
+      }
+    }
+    );
+   
+  }
   isAdmin() {
     return this.auth.isAdmin;
   }
-  
+
   getTodos() {
     this.todoService.getTeamTodos().subscribe((todos: any) => {
       this.userTodos = todos;
@@ -91,7 +110,7 @@ export class TeamComponent implements OnInit {
       description: 'Do something',
       status: 'not started',
       type: 'team',
-      id: this.userTodos.length === 0 ? 1 : this.userTodos[this.userTodos.length - 1].id + 1,
+      id: localStorage.getItem('USER_ID')
     }
     this.todoService.createTodo(todo).subscribe((todo: any) => {
 
@@ -125,7 +144,7 @@ export class TeamComponent implements OnInit {
       );
       const todo = event.container.data[event.currentIndex] as any;
 
-    
+
       if (event.container.id === "cdk-drop-list-0") {
         todo.status = 'not started';
       }

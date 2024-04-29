@@ -1,0 +1,53 @@
+
+
+<div class="p-4 transition-all duration-700 rounded-lg w-120 h-120 bg-stone-50">
+    <div class="flex items-center justify-between">
+        <h1 class="text-2xl font-semibold">User List</h1>
+        <div class="flex gap-2">
+            <span (click)="closeModal()" class="p-2 rounded-lg cursor-pointer hover:bg-gray-100">
+                <svg class="w-6 h-6 text-gray-500 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </span>
+        </div>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="w-full overflow-hidden rounded-t-lg ">
+            <thead class="text-xs font-semibold text-gray-700 uppercase bg-zinc-300">
+                <tr class="*:p-3 ">
+                    <th class=" whitespace-nowrap">
+                        <div class="font-semibold text-left">Name</div>
+                    </th>
+                    <th class="whitespace-nowrap">
+                        <div class="font-semibold text-left">Status</div>
+                    </th>
+                    <th class=" whitespace-nowrap">
+                        <div class="font-semibold text-left">Role</div>
+                    </th>
+                    
+                </tr>
+            </thead>
+            <tbody class="text-sm divide-y divide-gray-100">
+                <tr *ngFor="let item of team">
+                    <td class="p-2 whitespace-nowrap">
+                        <div class="font-medium text-gray-800">  {{item.username}} </div>
+                        
+                    </td>
+                   
+                    <td class="p-2 whitespace-nowrap">
+                        <div [ngClass]="{'text-green-500': item.online == true, ' text-red-500': item.online == false}" class="font-medium text-left">{{item.online ==  true ? 'Online' : 'Offline'}}</div>
+                    </td>
+                    <td class="p-2 ">
+                        <div class="text-start">{{item.role}}</div>
+                    </td>
+                </tr>
+               
+     
+            </tbody>
+        </table>
+    </div>
+  
+        
+  
+</div>
