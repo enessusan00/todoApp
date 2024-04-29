@@ -2,25 +2,26 @@
     <p class="flex-none text-2xl font-bold text-neutral-800">
         My Space
     </p>
-    <div cdkDropListGroup class="grid items-start justify-start grid-cols-3 gap-12 p-5 overflow-scroll bg-stone-50 rounded-xl grow">
-        <div class="flex flex-col h-full overflow-scroll ">
+    <div cdkDropListGroup
+        class="grid items-start justify-start grid-cols-3 gap-12 p-5 overflow-scroll bg-stone-50 rounded-xl grow">
+        <div class="flex flex-col w-full h-full overflow-x-scroll">
             <p class="flex mb-2">
                 <span class="px-3 py-1 text-base font-semibold bg-zinc-200 rounded-2xl text-neutral-600 ">
 
                     Not started
                 </span>
             </p>
-            <div class="flex h-full overflow-auto ">
-                <!-- Todo -->
+            <div class="flex w-full h-full overflow-x-hidden overflow-y-auto">
+                <!-- Not Started -->
                 <div class="h-full grow">
-                    <div cdkDropList [cdkDropListData]="not_started" class="h-full example-list"
+                    <div cdkDropList [cdkDropListData]="not_started" class="h-full overflow-y-auto example-list"
                         (cdkDropListDropped)="drop($event)">
-                        
+
                         <div *ngFor="let item of not_started" (click)="openDialog(item)" cdkDrag
-                            class="w-full gap-2 p-4 mb-3 bg-white border rounded-lg shadow cursor-pointer group hover:bg-zinc-50 border-zinc-300">
+                            class="gap-2 p-4 mb-3 bg-white border rounded-lg shadow cursor-pointer max-w-96 group text-wrap hover:bg-zinc-50 border-zinc-300">
                             <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
                             <div class="flex items-center justify-between w-full ">
-                                <p class="font-semibold truncate text-neutral-800 max-w-80">
+                                <p class="font-semibold truncate text-neutral-800 max-w-96">
                                     {{item.title}}
                                 </p>
 
@@ -30,6 +31,7 @@
                             </p>
 
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -84,9 +86,9 @@
             <div class="flex h-full overflow-scroll ">
                 <!-- Todo -->
                 <div class=" grow">
-                    <div cdkDropList [cdkDropListData]="done" class="h-full example-list" (cdkDropListDropped)="drop($event)">
-                        <div *ngFor="let item of done " (click)="openDialog(item)"
-                            cdkDrag
+                    <div cdkDropList [cdkDropListData]="done" class="h-full example-list"
+                        (cdkDropListDropped)="drop($event)">
+                        <div *ngFor="let item of done " (click)="openDialog(item)" cdkDrag
                             class="w-full gap-2 p-4 mb-3 bg-white border rounded-lg shadow group border-zinc-300">
                             <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
 
@@ -99,6 +101,18 @@
                                 {{item.description}}
                             </p>
 
+                        </div>
+                        <div
+                            *ngIf=" (not_started.length != 0 || in_progress.length != 0) && done.length == 0 ">
+                            <div class="w-full p-4 mb-3 bg-white border rounded-lg shadow ">
+                                <p class="font-semibold text-neutral-700">
+                                    Nothing to be done 🙃
+                                </p>
+                            </div>
+
+                            <div class="w-full p-4 bg-white border rounded-lg shadow ">
+                                <img src="assets/images/done.png" class="h-96" alt="">
+                            </div>
                         </div>
                     </div>
                 </div>
