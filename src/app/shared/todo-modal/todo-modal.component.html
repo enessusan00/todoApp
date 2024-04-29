@@ -3,7 +3,7 @@
         <h1 class="text-2xl font-semibold">Task Detail</h1>
         <div class="flex gap-2">
 
-            <span (click)="removeTodo(todo.id)" class="p-2 rounded-lg cursor-pointer hover:bg-red-100">
+            <span *ngIf="canEdit" (click)="removeTodo(todo.id)" class="p-2 rounded-lg cursor-pointer hover:bg-red-100">
                 <svg class="w-6 h-6 text-red-500 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 18 20">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -27,7 +27,7 @@
                     class="p-1 text-sm rounded-md w-96 disabled:bg-opacity-0 disabled:bg-white/0 "
                     [(ngModel)]="todo.title">
             </div>
-            <button class="p-1 rounded-md hover:bg-white group-has-[:disabled]:block hidden"
+            <button *ngIf="canEdit" class="p-1 rounded-md hover:bg-white group-has-[:disabled]:block hidden"
                 (click)="toggleEdit('titleInput')">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
                     <path
@@ -35,7 +35,7 @@
                 </svg>
             </button>
             <!-- Edit title -->
-            <button class="p-1 rounded-md hover:bg-white group-has-[:disabled]:hidden block"
+            <button *ngIf="canEdit" class="p-1 rounded-md hover:bg-white group-has-[:disabled]:hidden block"
                 (click)="toggleEdit('titleInput')">
                 <svg class="w-6 h-6 text-green-500 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 16 12">
@@ -50,7 +50,7 @@
                 <div class="flex items-center flex-none gap-2">
                     <span class="text-sm font-semibold ">Description</span>
                 </div>
-                <button class=" p-1 rounded-md hover:bg-white group-has-[:disabled]:block hidden"
+                <button *ngIf="canEdit" class=" p-1 rounded-md hover:bg-white group-has-[:disabled]:block hidden"
                     (click)="toggleEdit('descriptionInput')">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
                         <path
@@ -58,7 +58,7 @@
                     </svg>
                 </button>
 
-                <button class=" group-has-[:disabled]:hidden block p-1 rounded-md hover:bg-white"
+                <button *ngIf="canEdit" class=" group-has-[:disabled]:hidden block p-1 rounded-md hover:bg-white"
                     (click)="toggleEdit('descriptionInput')">
                     <svg class="w-6 h-6 text-green-500 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 16 12">
@@ -68,7 +68,7 @@
                 </button>
 
             </div>
-            <textarea disabled maxlength="40" required type="text" id="descriptionInput" [(ngModel)]="todo.description"
+            <textarea disabled maxlength="400" required type="text" id="descriptionInput" [(ngModel)]="todo.description"
                 class="w-full p-2 text-xs font-medium rounded-md resize-none min-h-24 disabled:bg-opacity-0 disabled:bg-white/0"></textarea>
         </div>
         <div class="flex justify-between w-full p-2">
@@ -111,12 +111,12 @@
 
 
                             <span class="mt-2 text-xs leading-normal text-gray-400/50">Upload Image</span>
-                            <input type='file' accept="image/*" class="hidden" (change)="uploadImage($event)" />
+                            <input *ngIf="canEdit" type='file' accept="image/*" class="hidden" (change)="uploadImage($event)" />
                         </label>
                     </div>
                     <div *ngFor="let item of images" class="relative shrink-0 group">
                         <img [src]="item.url" alt="Placeholder Image 1" class="object-cover rounded-md size-44">
-                        <button (click)="deleteTodoImage(item.id)"
+                        <button *ngIf="canEdit" (click)="deleteTodoImage(item.id)"
                             class="absolute p-1 text-white rounded-full opacity-0 group-hover:opacity-100 hover:bg-red-500 bg-red-500/40 top-2 right-2">
                             <svg class="w-4 h-4 text-white stroke-current" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 24 24">

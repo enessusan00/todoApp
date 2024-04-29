@@ -4,6 +4,7 @@ import { Component, EventEmitter, Inject, Injectable, Input, OnInit, Output, Tem
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/app/auth/auth.service';
 import { TodoService } from 'src/app/todo.service';
 
 @Component({
@@ -18,9 +19,9 @@ export class TodoModalComponent implements OnInit {
   constructor(
     private todoService: TodoService,
     config: NgbModalConfig,
-    private modalService: NgbModal,
-    @Inject(DIALOG_DATA) public data: { todo: any },
-    public dialogRef: MatDialogRef<TodoModalComponent>
+    @Inject(DIALOG_DATA) public data: { todo: any , component? : any},
+    public dialogRef: MatDialogRef<TodoModalComponent>,
+    private auth : AuthService
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -46,11 +47,17 @@ export class TodoModalComponent implements OnInit {
       this.closeModal();
     });
   }
+  canEdit = true;
   ngOnInit(): void {
     this.todo = this.data.todo;
+    if(this.data.component){
+      this.canEdit = this.isAdmin();
+    }
     this.getImages();
   }
-
+  isAdmin() {
+    return this.auth.isAdmin;
+  }
   focusToInput(id: string) {
     const input = document.getElementById(id) as HTMLInputElement;
     if (input) {
@@ -87,7 +94,7 @@ export class TodoModalComponent implements OnInit {
           id: image.id,
           url: 'http://localhost:8080/' + image.imagePath
         }
-      });
+      }).reverse();
     });
   }
   deleteTodoImage(id: number) {
