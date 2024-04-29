@@ -18,7 +18,7 @@
                         (cdkDropListDropped)="drop($event)">
 
                         <div *ngFor="let item of not_started" (click)="openDialog(item)" cdkDrag
-                            class="gap-2 p-4 mb-3 bg-white border rounded-lg shadow cursor-pointer max-w-96 group text-wrap hover:bg-zinc-50 border-zinc-300">
+                            class="gap-2 p-4 mb-3 bg-white border rounded-lg shadow cursor-pointer group text-wrap hover:bg-zinc-50 border-zinc-300">
                             <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
                             <div class="flex items-center justify-between w-full ">
                                 <p class="font-semibold truncate text-neutral-800 max-w-96">
