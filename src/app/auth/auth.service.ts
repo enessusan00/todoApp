@@ -19,14 +19,18 @@ export class AuthService {
         localStorage.removeItem('USER_ID');
 
     }
-
+     status() {
+        return this.http.post<any>(`${this.environment.apiUrl}/active`,{
+            userId: localStorage.getItem('USER_ID')
+        });
+    }
     setToken(response: any) {
-        localStorage.setItem('USERNAME',response.username)
+        localStorage.setItem('USERNAME', response.username)
         localStorage.setItem('ACCESS_TOKEN', response.token);
         localStorage.setItem('USER_ID', response.id);
         localStorage.setItem('ROLE', response.role);
     }
-    signup(username: string , email: string, password: string): Observable<any> {
+    signup(username: string, email: string, password: string): Observable<any> {
         const data = { username, email, password };
         return this.http.post<any>(`${this.environment.apiUrl}/signup`, data).pipe(
             tap((response: any) => {
@@ -57,16 +61,20 @@ export class AuthService {
     }
     // LOGOUT
     logout(): Observable<any> {
+
+        const userid = Number(  localStorage.getItem('USER_ID') )
         return this.http
-            .post(`${this.environment.apiUrl}/logout`, { withCredentials: true })
+            .post(`${this.environment.apiUrl}/logout/` + userid , { withCredentials: true })
             .pipe(
                 tap((response: any) => {
                     this.clearToken();
                 }),
             );
     }
-    createAdmin(username: string , email: string, password: string): Observable<any> {
-        const data = { username, email, password,role:'admin' };
+    createAdmin(username: string, email: string, password: string): Observable<any> {
+        const data = { username, email, password, role: 'admin' };
         return this.http.post<any>(`${this.environment.apiUrl}/signup `, data);
     }
+
+
 }

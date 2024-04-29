@@ -6,9 +6,11 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { WebSocketService } from 'src/app/auth/websocket.service';
 import { TodoModalComponent } from 'src/app/shared/todo-modal/todo-modal.component';
 import { UserListComponent } from 'src/app/shared/user-list/user-list.component';
 import { TodoService } from 'src/app/todo.service';
@@ -18,7 +20,9 @@ import { TodoService } from 'src/app/todo.service';
   templateUrl: './team.component.html',
   styleUrls: ['./team.component.scss']
 })
-export class TeamComponent implements OnInit {
+export class TeamComponent implements OnInit, OnDestroy {
+  private adminSubscription: Subscription = new Subscription();
+  private updatesSubscription: Subscription = new Subscription();
   todo: any = {
     title: 'Todo 1',
     description: 'This is the first todo',
@@ -32,7 +36,7 @@ export class TeamComponent implements OnInit {
   in_progress: any[];
   done: any[];
   status = ['not started', 'in progress', 'done'];
-  constructor(public dialog: MatDialog, private todoService: TodoService, private auth: AuthService) {
+  constructor(public dialog: MatDialog, private todoService: TodoService, private auth: AuthService, private websocketService: WebSocketService) {
     this.dialogTemplate = {} as TemplateRef<any>;
     this.userTodos = [];
     this.not_started = [];
@@ -68,15 +72,36 @@ export class TeamComponent implements OnInit {
     this.getTodos();
     if (this.isAdmin()) {
       this.getUserList();
+      this.adminSubscription = this.websocketService.getUpdates("admin").subscribe({
+        next: (update) => {
+          this.team.find((user: any) => user.id === Number(update.userId)).online = update.status;
+        },
+        error: (error) => console.error(error)
+      });
     }
+
+    this.updatesSubscription = this.websocketService.getUpdates("notify").subscribe({
+      next: (update) => {
+        this.getTodos();
+      },
+      error: (error) => console.error(error)
+    });
+
+
   }
-  activeCount = 0;
+  ngOnDestroy(): void {
+    this.updatesSubscription.unsubscribe();
+  }
+
   getUserList() {
     this.auth.getUserList().subscribe((users: any) => {
       this.team = users;
-      this.activeCount = this.team.filter((user: any) => user.active).length;
+
 
     });
+  }
+  getActiveCount() {
+    return this.team.filter((user: any) => user.online == true).length;
   }
   showUserList() {
     const dialogRef = this.dialog.open(UserListComponent, {
@@ -85,7 +110,7 @@ export class TeamComponent implements OnInit {
       }
     }
     );
-   
+
   }
   isAdmin() {
     return this.auth.isAdmin;

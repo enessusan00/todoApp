@@ -4,7 +4,9 @@ import { Component, EventEmitter, Inject, Injectable, Input, OnInit, Output, Tem
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NgbModal, NgbModalConfig, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { WebSocketService } from 'src/app/auth/websocket.service';
 import { TodoService } from 'src/app/todo.service';
 
 @Component({
@@ -16,7 +18,10 @@ import { TodoService } from 'src/app/todo.service';
 
 @Injectable()
 export class UserListComponent implements OnInit {
+  private updatesSubscription: Subscription = new Subscription();
+  
   constructor(
+    private websocketService: WebSocketService,
     private todoService: TodoService,
     config: NgbModalConfig,
     @Inject(DIALOG_DATA) public data: { team: any },
@@ -34,7 +39,13 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.team = this.data.team;
-   
+    this.updatesSubscription = this.websocketService.getUpdates("admin").subscribe({
+      next: (update) => {
+        console.log(update);
+        this.team.find((user: any) => user.id === Number(update.userId)).online = update.status;
+      },
+      error: (error) => console.error(error)
+    });
   }
 
 

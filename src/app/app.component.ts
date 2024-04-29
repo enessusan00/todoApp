@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor() { }
-
+  constructor(private auth: AuthService) { }
+  @HostListener('window:unload', ['$event'])
+  unloadHandler(event: Event) {
+    // unload olayında yapılacak işlemler
+    this.auth.status().subscribe()
+  }
 }
 
