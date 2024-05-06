@@ -22,6 +22,7 @@
     "@angular/router": "^16.2.0",
     "@ng-bootstrap/ng-bootstrap": "^15.1.2",
     "@popperjs/core": "^2.11.6",
+    "ng-alt-snotify": "^16.0.0",
     "ngx-pipes": "^3.2.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

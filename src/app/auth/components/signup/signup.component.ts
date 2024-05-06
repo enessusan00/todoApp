@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { SnotifyService } from 'ng-alt-snotify';
 
 @Component({
   selector: 'app-signup',
@@ -12,7 +13,8 @@ export class SignupComponent {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private snotifyService: SnotifyService
 
   ) {
   }
@@ -72,8 +74,11 @@ export class SignupComponent {
           this.login(  this.form.value.email, this.form.value.password);
         },
         error: (e) => {
-          this.errorText = e.error;
+          this.errorText = e.error.message;
           this.showError = true;
+          this.snotifyService.error(this.errorText, 'Error', {
+            timeout: 1000
+          });
         }
       }
     );

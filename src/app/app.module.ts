@@ -18,6 +18,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { CdkDropList } from '@angular/cdk/drag-drop';
 import { MatButtonModule } from '@angular/material/button';
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-alt-snotify';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,10 +40,13 @@ CdkDropList,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    SnotifyModule
   ],
   providers: [
     AuthInterceptorProvider,
     AuthGuard,
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService
   ],
   bootstrap: [AppComponent]
 })
