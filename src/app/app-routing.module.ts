@@ -17,7 +17,7 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () =>
-         import('./dashboard/dashboard.module').then((m):typeof DashboardModule => m.DashboardModule)
+          import('./dashboard/dashboard.module').then((m): typeof DashboardModule => m.DashboardModule)
       }
     ]
   },
@@ -25,36 +25,23 @@ const routes: Routes = [
     path: '',
     redirectTo: '/signin',
     pathMatch: 'full'
+
   },
-  // {
-  //   path: 'admin-dashboard',
-  //   canActivate: [AuthGuard],
-  //   data: { roles: ['admin'] },
-  // },
-  // {
-  //   path: 'dashboard',
-  //   canActivate: [ AuthGuard],
-  //   component: DashboardComponent,
-  //   data: { roles: ['user'] }
-  // }
-  
-  // {
-  //   path: 'dashboard',
-  //   component: DashboardComponent,
-  //   canActivate: [AuthGuard]
-  // },
   {
-    path:'signin',
+    path: 'signin',
     component: SigninComponent
   },
   {
     path: 'signup',
     component: SignupComponent
-  }
+  },
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { paramsInheritanceStrategy: 'always' }),
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

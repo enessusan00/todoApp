@@ -8,6 +8,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from 'src/app/auth/auth.service';
 import { TodoModalComponent } from 'src/app/shared/todo-modal/todo-modal.component';
 import { TodoService } from 'src/app/todo.service';
 
@@ -23,15 +24,17 @@ export class UserComponent implements OnInit {
     status: 'on going',
     id: 1
   }
-  @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any> = {} as TemplateRef<any>;
   userTodos: any[];
 
   not_started: any[];
   in_progress: any[];
   done: any[];
   status = ['not started', 'in progress', 'done'];
-  constructor(public dialog: MatDialog, private todoService: TodoService) {
-    this.dialogTemplate = {} as TemplateRef<any>;
+  constructor(
+    public dialog: MatDialog,
+    private todoService: TodoService,
+    private authService: AuthService
+  ) {
     this.userTodos = [];
     this.not_started = [];
     this.in_progress = [];
@@ -59,17 +62,24 @@ export class UserComponent implements OnInit {
     });
   }
 
-  
+
   ngOnInit(): void {
     this.getTodos();
   }
   getTodos() {
-    this.todoService.getTodos().subscribe((todos: any) => {
-      this.userTodos = todos;
-      this.not_started = this.userTodos.filter(todo => todo.status === 'not started');
-      this.in_progress = this.userTodos.filter(todo => todo.status === 'in progress');
-      this.done = this.userTodos.filter(todo => todo.status === 'done');
-    });
+    this.todoService.getTodos().subscribe(
+      {
+        next: (todos: any) => {
+          this.userTodos = todos;
+          this.not_started = this.userTodos.filter(todo => todo.status === 'not started');
+          this.in_progress = this.userTodos.filter(todo => todo.status === 'in progress');
+          this.done = this.userTodos.filter(todo => todo.status === 'done');
+        },
+        error: (e) => {
+          this.authService.logout().subscribe();
+        }
+      }
+    )
   }
 
   createTodo() {
@@ -116,7 +126,7 @@ export class UserComponent implements OnInit {
       );
       const todo = event.container.data[event.currentIndex] as any;
 
-    
+
       if (event.container.id === "cdk-drop-list-0") {
         todo.status = 'not started';
       }

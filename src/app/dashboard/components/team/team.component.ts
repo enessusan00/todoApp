@@ -117,12 +117,19 @@ export class TeamComponent implements OnInit, OnDestroy {
   }
 
   getTodos() {
-    this.todoService.getTeamTodos().subscribe((todos: any) => {
-      this.userTodos = todos;
-      this.not_started = this.userTodos.filter(todo => todo.status === 'not started');
-      this.in_progress = this.userTodos.filter(todo => todo.status === 'in progress');
-      this.done = this.userTodos.filter(todo => todo.status === 'done');
-    });
+    this.todoService.getTeamTodos().subscribe(
+      {
+        next: (todos: any) => {
+          this.userTodos = todos;
+          this.not_started = this.userTodos.filter(todo => todo.status === 'not started');
+          this.in_progress = this.userTodos.filter(todo => todo.status === 'in progress');
+          this.done = this.userTodos.filter(todo => todo.status === 'done');
+        },
+        error: (e) => {
+          this.auth.logout().subscribe();
+        }
+      }
+    );
   }
 
   createTodo() {

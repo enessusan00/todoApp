@@ -11,7 +11,7 @@ import { TodoService } from 'src/app/todo.service';
   selector: 'todo-modal',
   templateUrl: './todo-modal.component.html',
   styleUrls: ['./todo-modal.component.scss'],
-  providers: [NgbModalConfig, NgbModal, MatButtonModule, MatButtonModule]
+  providers: [MatButtonModule]
 })
 
 @Injectable()
@@ -19,9 +19,9 @@ export class TodoModalComponent implements OnInit {
   constructor(
     private todoService: TodoService,
     config: NgbModalConfig,
-    @Inject(DIALOG_DATA) public data: { todo: any , component? : any},
+    @Inject(DIALOG_DATA) public data: { todo: any, component?: any },
     public dialogRef: MatDialogRef<TodoModalComponent>,
-    private auth : AuthService
+    private auth: AuthService
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -50,7 +50,7 @@ export class TodoModalComponent implements OnInit {
   canEdit = true;
   ngOnInit(): void {
     this.todo = this.data.todo;
-    if(this.data.component){
+    if (this.data.component) {
       this.canEdit = this.isAdmin();
     }
     this.getImages();
