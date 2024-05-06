@@ -12,22 +12,24 @@ Run `ng serve --port 8081` for a dev server. Navigate to `http://localhost:8081/
 
 ## Auth Page
 
-### Login 
-![TodoApp · 4 18pm · 03-19](https://github.com/enessusan00/todoApp/assets/69691286/897c0a83-78e7-4ff4-90d8-c4bfead0e60e)
+### Sign In
+![TodoApp · 1 41pm · 05-06](https://github.com/enessusan00/todoApp/assets/69691286/32fdaef6-5216-4dec-8646-8827f7eee8e6)
 
-### Sign Up / Create Admin User
-![Screenshot 2024-03-19 at 16 18 56](https://github.com/enessusan00/todoApp/assets/69691286/3cf2deba-faec-42fa-9129-ac090bfa588e)
+### Sign Up
+![TodoApp · 1 41pm · 05-06 (1)](https://github.com/enessusan00/todoApp/assets/69691286/54bfe432-64fe-429e-9235-70b2ccd806dc)
 
-## Dashboard Page
 
-![user dashboard](https://github.com/enessusan00/todoApp/assets/69691286/de5c157c-fda5-48fc-be2a-571c112737a7)
+## Personal Page
+![TodoApp · 1 45pm · 05-06](https://github.com/enessusan00/todoApp/assets/69691286/83a841e5-5c12-46b4-97f2-8828dab8b6d5)
 
 ### Task Detail
-![TodoApp · 4 38pm · 03-19](https://github.com/enessusan00/todoApp/assets/69691286/a0ea515c-5455-481a-bcbf-15c5b2f609e8)
-
-## Admin Dashboard Page
-
-![admin-dashboard  admin ](https://github.com/enessusan00/todoApp/assets/69691286/8508b3be-9dd6-478f-a320-10865d90fe33)
+![TodoApp · 1 47pm · 05-06](https://github.com/enessusan00/todoApp/assets/69691286/5965c7ea-ff4d-4304-a2ec-13175855fc63)
 
 
-![admin-dashboard  user ](https://github.com/enessusan00/todoApp/assets/69691286/7d170198-9085-4d15-8764-d2b544a53a63)
+## Team Page
+
+![TodoApp · 1 50pm · 05-06](https://github.com/enessusan00/todoApp/assets/69691286/1d48aee5-639f-4c8b-aba1-c8aa8016a359)
+
+## Admin-Team Page
+
+![TodoApp · 1 49pm · 05-06](https://github.com/enessusan00/todoApp/assets/69691286/162b198b-207a-45f2-8606-0b062c7a6a4d)
