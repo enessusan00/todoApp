@@ -8,6 +8,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { WebSocketService } from 'src/app/auth/websocket.service';
@@ -36,7 +37,14 @@ export class TeamComponent implements OnInit, OnDestroy {
   in_progress: any[];
   done: any[];
   status = ['not started', 'in progress', 'done'];
-  constructor(public dialog: MatDialog, private todoService: TodoService, private auth: AuthService, private websocketService: WebSocketService) {
+
+  constructor(
+    public dialog: MatDialog,
+    private todoService: TodoService,
+    private auth: AuthService,
+    private websocketService: WebSocketService,
+    private route: Router
+  ) {
     this.dialogTemplate = {} as TemplateRef<any>;
     this.userTodos = [];
     this.not_started = [];
@@ -127,6 +135,7 @@ export class TeamComponent implements OnInit, OnDestroy {
         },
         error: (e) => {
           this.auth.logout().subscribe();
+          this.route.navigate(['/signin']);
         }
       }
     );

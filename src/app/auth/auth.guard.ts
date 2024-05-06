@@ -54,7 +54,7 @@ export class AuthGuard implements CanLoad {
       if (this.authService.authenticated) {
         return true;
       } else {
-        this.router.navigate(['/auth']);
+        this.router.navigate(['/signin']);
         return false;
       }
     

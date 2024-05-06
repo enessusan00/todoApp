@@ -8,6 +8,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { TodoModalComponent } from 'src/app/shared/todo-modal/todo-modal.component';
 import { TodoService } from 'src/app/todo.service';
@@ -33,7 +34,8 @@ export class UserComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private todoService: TodoService,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: Router
   ) {
     this.userTodos = [];
     this.not_started = [];
@@ -70,13 +72,14 @@ export class UserComponent implements OnInit {
     this.todoService.getTodos().subscribe(
       {
         next: (todos: any) => {
-          this.userTodos = todos;
+          this.userTodos =todos.filter((todo : any)=> todo.type === 'personal');
           this.not_started = this.userTodos.filter(todo => todo.status === 'not started');
           this.in_progress = this.userTodos.filter(todo => todo.status === 'in progress');
           this.done = this.userTodos.filter(todo => todo.status === 'done');
         },
         error: (e) => {
           this.authService.logout().subscribe();
+          this.route.navigate(['/signin']);
         }
       }
     )
