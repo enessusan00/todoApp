@@ -41,7 +41,6 @@ export class UserListComponent implements OnInit {
     this.team = this.data.team;
     this.updatesSubscription = this.websocketService.getUpdates("admin").subscribe({
       next: (update) => {
-        console.log(update);
         this.team.find((user: any) => user.id === Number(update.userId)).online = update.status;
       },
       error: (error) => console.error(error)
