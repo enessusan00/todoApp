@@ -28,8 +28,8 @@
         </div>
     </div>
     <div cdkDropListGroup
-        class="grid items-start justify-start grid-cols-3 gap-12 p-5 overflow-scroll bg-stone-50 rounded-xl grow">
-        <div class="flex flex-col w-full h-full overflow-x-scroll">
+        class="grid items-start justify-start grid-cols-3 gap-12 p-5 overflow-auto bg-stone-50 rounded-xl grow">
+        <div class="flex flex-col w-full h-full overflow-x-auto">
             <p class="flex mb-2">
                 <span class="px-3 py-1 text-base font-semibold bg-zinc-200 rounded-2xl text-neutral-600 ">
 
@@ -61,7 +61,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-col h-full overflow-scroll ">
+        <div class="flex flex-col h-full overflow-auto ">
             <p class="flex mb-2">
                 <span class="px-3 py-1 text-base font-semibold bg-violet-100 rounded-2xl text-neutral-600 ">
 
@@ -100,7 +100,7 @@
                     Done
                 </span>
             </p>
-            <div class="flex h-full overflow-scroll ">
+            <div class="flex h-full overflow-auto ">
                 <!-- Todo -->
                 <div class=" grow">
                     <div cdkDropList [cdkDropListData]="done" class="h-full example-list"
