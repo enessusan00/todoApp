@@ -8,6 +8,13 @@ Design with [**TailwindCSS**](https://tailwindcss.com/) .
 
 Run `ng serve --port 8081` for a dev server. Navigate to `http://localhost:8081/`. The application will automatically reload if you change any of the source files.
 
+# Routes
+
+/signin 
+/signup
+/dashboard
+/team
+
 # Components
 
 ## Auth Page
