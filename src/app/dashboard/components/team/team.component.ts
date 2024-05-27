@@ -130,8 +130,11 @@ export class TeamComponent implements OnInit, OnDestroy {
         next: (todos: any) => {
           this.userTodos = todos;
           this.not_started = this.userTodos.filter(todo => todo.status === 'not started');
+          this.not_started.sort((a, b) => b.id - a.id);
           this.in_progress = this.userTodos.filter(todo => todo.status === 'in progress');
+          this.in_progress.sort((a, b) => b.id - a.id);
           this.done = this.userTodos.filter(todo => todo.status === 'done');
+          this.done.sort((a, b) => b.id - a.id);
         },
         error: (e) => {
           this.auth.logout().subscribe();
@@ -155,21 +158,21 @@ export class TeamComponent implements OnInit, OnDestroy {
     }
     this.todoService.createTodo(todo).subscribe((todo: any) => {
 
-      this.userTodos.push(todo);
-    }
-    );
-    const dialogRef = this.dialog.open(TodoModalComponent, {
-      data: {
-        todo: todo
+      this.userTodos.splice(0,0,todo);
+      const dialogRef = this.dialog.open(TodoModalComponent, {
+        data: {
+          todo: todo
+        }
       }
+      );
+      dialogRef.afterClosed().subscribe(
+        (result) => {
+          this.getTodos();
+  
+  
+        }
+      );
     }
-    );
-    dialogRef.afterClosed().subscribe(
-      (result) => {
-        this.getTodos();
-
-
-      }
     );
   }
 

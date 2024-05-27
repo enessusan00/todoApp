@@ -88,6 +88,8 @@ export class TodoModalComponent implements OnInit {
   }
   images: any;
   getImages() {
+
+    this.images = [];
     this.todoService.getTodoImages(this.todo.id).subscribe((data: any) => {
       this.images = data.map((image: any) => {
         return {

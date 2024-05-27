@@ -91,7 +91,7 @@
         <div class="flex flex-col w-full gap-2 p-4 bg-gray-100 grow">
             <span class="flex items-center h-6 text-sm font-semibold flex-0"> Gallery </span>
             <div class="w-full h-full grow">
-                <div class="flex space-x-4 overflow-x-scroll h-44">
+                <div class="flex space-x-4 overflow-x-auto overflow-y-hidden h-44">
                     <div class="relative shrink-0 group">
 
                         <label *ngIf="canEdit"
@@ -115,7 +115,7 @@
                         </label>
                     </div>
                     <div *ngFor="let item of images" class="relative shrink-0 group">
-                        <img [src]="item.url" alt="Placeholder Image 1" class="object-cover rounded-md size-44">
+                        <img [src]="item.url" alt="Placeholder Image 1" class="object-cover rounded-md size-40">
                         <button *ngIf="canEdit" (click)="deleteTodoImage(item.id)"
                             class="absolute p-1 text-white rounded-full opacity-0 group-hover:opacity-100 hover:bg-red-500 bg-red-500/40 top-2 right-2">
                             <svg class="w-4 h-4 text-white stroke-current" xmlns="http://www.w3.org/2000/svg"
