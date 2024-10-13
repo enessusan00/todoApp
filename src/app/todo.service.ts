@@ -16,6 +16,9 @@ export class TodoService {
   getTodos(): Observable<any> {
     return this.http.get(baseUrl + `/${localStorage.getItem('USER_ID')}/user`);
   }
+  getUserTodos(id: number): Observable<any> {
+    return this.http.get(`${baseUrl}/${id}/user`);
+  }
   createTodo(data: any): Observable<any> {
     return this.http.post(baseUrl, data);
   }
